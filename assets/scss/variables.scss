@@ -1,0 +1,40 @@
+// Sizes
+$base: 8px;
+$baseMaxWidth: $base * 120;
+
+// Colors
+$black: #000;
+$white: #FFF;
+$mainBg: #FFF;
+
+// Mixins
+/*
+  Uses mobile-first approach.
+  Phone @media rule: (max-width: 420px) and (max-height: 812px)
+*/
+
+@mixin screenSizes($size) {
+    @if $size==tabletPortrait {
+        @media (min-width: 491px) {
+            @content;
+        }
+    }
+
+    @else if $size==desktop {
+        @media (min-width: 900px) {
+            @content;
+        }
+    }
+
+    @else if $size==largeDesktop {
+        @media (min-width: 1200px) {
+            @content;
+        }
+    }
+}
+
+@mixin strokeText($color) {
+    color: transparent;
+    -webkit-text-stroke: 1px $color;
+    font-weight: normal;
+}
