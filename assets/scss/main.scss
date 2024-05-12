@@ -1,3 +1,11 @@
+@font-face {
+    font-family: 'FIRSTGAYAMERICANS';
+    src: url('/fonts/FIRSTGAYAMERICANS-Regular.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+    font-display: swap;
+}
+
 *::selection {
     background-color: $black;
     color: $mainBg;
@@ -8,6 +16,10 @@
     color: $mainBg;
 }
 
+* {
+    text-transform: uppercase;
+}
+
 html {
     background: $mainBg;
     -webkit-font-smoothing: antialiased;
@@ -16,8 +28,12 @@ html {
 }
 
 body {
-    font-family: "Inter", sans-serif;
+    font-family: 'FIRSTGAYAMERICANS', sans-serif;
     margin: 0;
+}
+
+button {
+    font-family: 'FIRSTGAYAMERICANS', sans-serif;
 }
 
 h1,

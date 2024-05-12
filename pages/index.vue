@@ -15,31 +15,32 @@
     <div class="calendar">
         <h3>Calendar</h3>
         <p>{{ eventCount }} events registrered so far</p>
-        <NuxtLink to="#submission">Add your event</NuxtLink>
-        <p>Pick a date</p>
         <div class="date-buttons">
-            <button v-for="date in dates" :class="activeDate === date ? 'active' : ''" @click="activeDate = date">{{ date }}</button>
+            <button v-for="date in dates" :class="activeDate === date ? 'active' : ''" @click="activeDate = date" v-html="date > 0 ? date + '.<br>AUG' : 'All days' "></button>
         </div>
         <div class="events-container">
-            <div v-for="event in events" class="event">
-                <div class="event-content">
-                    <div class="event-image" :style="imageSrc(event)"></div>
-                    <div class="event-text">
-                        <h4>{{ event.title }}</h4>
-                        <h5>by {{ event.organisers }}</h5>
-                        <time :datetime="event.datetime">{{ event.datetime }}</time>
-                        <h6>{{ event.venue }}</h6>
+            <template v-for="event in events">
+                <NuxtLink  target="_blank" :to="event.url" class="event" v-if="activeDate === 0 || new Date(event.datetime).getDate() === activeDate">
+                    <div class="event-content">
+                        <div class="event-image" :style="imageSrc(event)"></div>
+                        <div class="event-text">
+                            <h4 class="event-title">{{ event.title }}</h4>
+                            <h5 class="event-organisers">by {{ event.organisers }}</h5>
+                            <p class="event-date"><strong>Date:</strong><span>{{ new Date(event.datetime).toLocaleDateString('da-DK') }}</span></p>
+                            <p class="event-time"><strong>Time:</strong><span>{{ new Date(event.datetime).toLocaleTimeString('da-DK', { hour: "2-digit", minute: "2-digit" }) }}</span></p>
+                            <h6 class="event-venue"><strong>Venue:</strong><span>{{ event.venue }}</span></h6>
+                        </div>
                     </div>
-                </div>
-                <NuxtLink class="event-link" target="_blank" :to="event.url">See more ></NuxtLink>
-            </div>
+                    <span class="event-link" target="_blank" :to="event.url">See more ></span>
+                </NuxtLink>
+            </template>
         </div>
     </div>
     <div class="submission" id="submission">
         <h3>Submit your event</h3>
         <p>To get your event onto the PRIDE IS POLITICAL calendar, we ask you to fill out a brief form with some basic information about your event.</p>
-        <p class="form-link"><NuxtLink to="/" target="_blank">Click here to find our event submission form</NuxtLink></p>
-        <p>If you have any questions about the form, <br><NuxtLink to="/contact" target="_blank">click here to find our contact information</NuxtLink>.</p>
+        <p class="form-link"><NuxtLink to="https://forms.zohopublic.eu/prideispoliticalcph/form/PRIDEISPOLITICAL2024/formperma/abHwwjwNIOTzTcV3VWHu9od-8viYKQZeJs4PLaYIe9s" target="_blank">Click here to find our event submission form</NuxtLink></p>
+        <p class="questions">If you have any questions about the form, <br><NuxtLink to="/contact" target="_blank">click here to find our contact information</NuxtLink>.</p>
     </div>
     <footer>
         <p>PRIDE IS POLITICAL is a project by <NuxtLink target="_blank" to="https://ada-ada-ada.art">Ada Ada Ada</NuxtLink> and <NuxtLink target="_blank" to="https://simensorthe.dk/">Simen Sorthe</NuxtLink>.</p>
@@ -47,10 +48,10 @@
 </template>
 
 <script setup lang="ts">
-let activeDate = ref(10)
-let dates = [10, 11, 12, 13, 14, 15, 16, 17, 18]
+let activeDate = ref(0)
+let dates = [0, 10, 11, 12, 13, 14, 15, 16, 17, 18]
 
-const { data: events } = await useAsyncData('events', () => queryContent('/events').find())
+const { data: events } = await useAsyncData('events', () => queryContent('/events').sort({datetime: 1}).find())
 let eventCount = events.value.length
 
 const img = useImage()
@@ -63,9 +64,6 @@ function imageSrc(event) {
 
 <style scoped lang="scss">
 .explainer {
-    background: dimgrey;
-    background-position: center;
-    background-size: cover;
     align-items: center;
     box-sizing: border-box;
     color: $white;
@@ -73,28 +71,37 @@ function imageSrc(event) {
     flex-direction: column;
     line-height: 250%;
     padding: $base * 8 0;
-    margin-bottom: $base * 8;
+    margin: $base * 4 0;
     text-align: center;
     width: 100%;
     
     h3 {
-        font-weight: normal;
+        color: black;
+        font-weight: bold;
         font-style: italic;
-        font-size: $base * 3;
+        font-size: $base * 6;
         max-width: $baseMaxWidth;
     }
 }
 
 .feature {
+    background-color: $secondaryColor;
     display: flex;
+    flex-wrap: wrap;
     margin-bottom: $base * 8;
+    padding: $base * 8 0;
+    width: 100%;
 
     > div {
         align-items: center;
         display: flex;
         flex-direction: column;
         justify-content: center;
-        width: 50%;
+        width: 100%;
+        
+        @include screenSizes(desktop) {
+            width: 50%;
+        }
     }
 
     .feature-text {
@@ -106,7 +113,8 @@ function imageSrc(event) {
         }
 
         p {
-            max-width: 75%;
+            font-size: $base * 3;
+            max-width: 60%;
         }
     }
 
@@ -127,45 +135,57 @@ function imageSrc(event) {
     margin-bottom: $base * 4;
 
     h3 {
-        font-size: $base * 4;
+        font-size: $base * 6;
         text-transform: uppercase;
     }
 
+    p {
+        font-size: $base * 3;
+    }
+
     > a {
-        border: 1px solid $black;
-        background: lightgrey;
-        color: $black;
+        background: $primaryColor;
+        color: $white;
         cursor: pointer;
+        font-size: $base * 3;
         padding: $base * 1.5 $base * 3;
+        margin-bottom: $base * 4;
         text-decoration: none;
     }
 }
 
 .date-buttons {
-    align-items: center;
     display: flex;
     justify-content: space-between;
-    width: $base * 50;
+    flex-flow: wrap;
+    width: 90vw;
+
+    @include screenSizes(desktop) {
+        flex-flow: nowrap;
+        width: 100%;
+    }
 
     button {
-        background: $white;
-        border: 1px solid $black;
+        background-color: $secondaryColor;
+        border: none;
         border-radius: 0;
         cursor: pointer;
-        height: $base * 4;
-        width: $base * 4;
+        font-size: $base * 2;
+        height: $base * 8;
+        width: $base * 8;
+        
+        @include screenSizes(desktop) {
+            height: $base * 8;
+            width: $base * 8;
+        }
 
         &.active {
-            background: $black;
+            background: $primaryColor;
             color: $white;
-
-            &:hover {
-                background-color: dimgrey;
-            }
         }
 
         &:not(.active):hover {
-            background-color: lightgrey;
+            border: 1px solid $primaryColor;
         }
     }
 }
@@ -176,17 +196,29 @@ function imageSrc(event) {
     flex-flow: row wrap;
     justify-content: space-between;
     margin-top: $base * 4;
-    width: $base * 110;
+    width: 90vw;
+
+    @include screenSizes(desktop) {
+        width: $base * 110;
+    }
 }
 
 .event {
-    border: 1px solid $black;
+    align-self: flex-start;
+    border: 1px solid $primaryColor;
+    color: $black;
     display: flex;
-    flex-basis: $base * 30;
+    flex-basis: 100%;
     flex-direction: column;
     min-height: $base * 40;
-    margin-bottom: $base * 2;
+    margin-bottom: $base * 4;
     justify-content: space-between;
+    text-decoration: none;
+    transition: 300ms box-shadow ease-in-out;
+
+    @include screenSizes(desktop) {
+        flex-basis: $base * 30;
+    }
 }
 
 .event-image {
@@ -200,6 +232,25 @@ function imageSrc(event) {
     display: flex;
     flex-direction: column;
     padding: $base;
+    font-family: sans-serif;
+
+    .event-organisers {
+        margin-bottom: $base;
+    }
+
+    p {
+        font-size: $base * 2;
+        margin: 0;
+    }
+
+    .event-time, .event-date, .event-venue {
+        display: flex;
+        justify-content: space-between;
+
+        > span {
+            text-align: right;
+        }
+    }
 
     h5 {
         font-style: italic;
@@ -213,7 +264,7 @@ function imageSrc(event) {
 }
 
 .event-link {
-    background: lightgrey;
+    border-top: 1px solid $primaryColor;
     display: flex;
     color: $black;
     padding: $base;
@@ -228,22 +279,27 @@ function imageSrc(event) {
     margin-bottom: $base * 4;
 
     p {
+        font-size: $base * 3;
         text-align: center;
         max-width: $base * 80;
     }
 
     h3 {
-        font-size: $base * 4;
+        font-size: $base * 6;
         text-transform: uppercase;
     }
 
     a {
+        color: $white;
+    }
+
+    .questions a {
         color: $black;
     }
 }
 
 .form-link {
-    background: lightgrey;
+    background: $primaryColor;
     padding: $base * 2;
     
     a {
@@ -253,7 +309,7 @@ function imageSrc(event) {
 
 footer {
     justify-content: center;
-    background: lightgrey;
+    background: $primaryColor;
     display: flex;
     padding: $base 0;
     width: 100%;

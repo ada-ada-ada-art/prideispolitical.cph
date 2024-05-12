@@ -1,7 +1,7 @@
 ---
 title: Nørrebro Pride
 description: Nørrebro Pride er et event hvor der sker ting.
-datetime: 10-08-2024 19:00:00
+datetime: 2024-08-10T19:00:00+02:00
 organisers: Nørrebro Pride
 venue: Nørrebros Runddel
 img_url: anti-fascist-pride.jpg

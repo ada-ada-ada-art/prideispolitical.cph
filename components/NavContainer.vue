@@ -8,14 +8,13 @@
         <div class="link-container">
             <NuxtLink to="/">Home</NuxtLink>
             <NuxtLink to="about">About</NuxtLink>
-            <NuxtLink to="contact">Contact</NuxtLink>
         </div>
     </nav>
 </template>
 
 <style scoped lang="scss">
 nav {
-    background: lightgrey;
+    background: $primaryColor;
     box-sizing: border-box;
     justify-content: space-between;
     display: flex;
@@ -25,21 +24,20 @@ nav {
 }
 
 h1 {
-    font-size: $base * 3;
-    letter-spacing: -1px;
+    font-size: $base * 6;
     text-align: left;
     text-transform: uppercase;
 }
 
 h2 {
-    font-size: $base * 1.5;
+    font-size: $base * 2;
     font-weight: normal;
     text-align: left;
     text-transform: uppercase;
 }
 
 a {
-    color: $black;
+    color: $white;
     text-decoration: none;
 }
 
@@ -49,6 +47,7 @@ a {
 }
 
 .link-container a {
+    font-size: $base * 3;
     margin-left: $base;
 }
 
@@ -57,8 +56,9 @@ a {
     position: relative;
 
     &::after {
-        background: $black;
+        background: $white;
         bottom: -3px;
+        border-radius: 1px 2px 1px 3px;
         content: "";
         height: 3px;
         left: 50%;
