@@ -40,7 +40,7 @@
         <h3>Submit your event</h3>
         <p>To get your event onto the PRIDE IS POLITICAL calendar, we ask you to fill out a brief form with some basic information about your event.</p>
         <p class="form-link"><NuxtLink to="https://forms.zohopublic.eu/prideispoliticalcph/form/PRIDEISPOLITICAL2024/formperma/abHwwjwNIOTzTcV3VWHu9od-8viYKQZeJs4PLaYIe9s" target="_blank">Click here to find our event submission form</NuxtLink></p>
-        <p class="questions">If you have any questions about the form, <br><NuxtLink to="/about" target="_blank">click here to find our contact information</NuxtLink>.</p>
+        <p class="questions">If you have any questions about the form, <br><NuxtLink to="/about">click here to find our contact information</NuxtLink>.</p>
     </div>
     <footer>
         <p>PRIDE IS POLITICAL is a project by <NuxtLink target="_blank" to="https://ada-ada-ada.art">Ada Ada Ada</NuxtLink> and <NuxtLink target="_blank" to="https://simensorthe.dk/">Simen Sorthe</NuxtLink>.</p>
