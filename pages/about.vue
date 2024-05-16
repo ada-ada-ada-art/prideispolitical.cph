@@ -21,7 +21,11 @@
 <style lang="scss" scoped>
 div {
     margin-top: $base * 4;
-    max-width: $baseMaxWidth;
+    max-width: $baseMaxMobileWidth;
+    
+    @include screenSizes(desktop) {
+        max-width: $baseMaxWidth;
+    }
 }
 
 h2 {
@@ -31,7 +35,8 @@ h2 {
 }
 
 p {
-    font-size: $base * 2.5;
+    font-family: "Inter", sans-serif;
+    font-size: $base * 2;
 }
 
 a {

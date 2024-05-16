@@ -28,7 +28,7 @@
                             <h5 class="event-organisers">by {{ event.organisers }}</h5>
                             <p class="event-date"><strong>Date:</strong><span>{{ new Date(event.datetime).toLocaleDateString('da-DK') }}</span></p>
                             <p class="event-time"><strong>Time:</strong><span>{{ new Date(event.datetime).toLocaleTimeString('da-DK', { hour: "2-digit", minute: "2-digit" }) }}</span></p>
-                            <h6 class="event-venue"><strong>Venue:</strong><span>{{ event.venue }}</span></h6>
+                            <p class="event-venue"><strong>Venue:</strong><span>{{ event.venue }}</span></p>
                         </div>
                     </div>
                     <span class="event-link" target="_blank" :to="event.url">See more ></span>
@@ -69,7 +69,6 @@ function imageSrc(event) {
     color: $white;
     display: flex;
     flex-direction: column;
-    line-height: 250%;
     padding: $base * 8 0;
     margin: $base * 4 0;
     text-align: center;
@@ -79,13 +78,34 @@ function imageSrc(event) {
         color: black;
         font-weight: bold;
         font-style: italic;
-        font-size: $base * 6;
+        font-size: $base * 4;
         max-width: $baseMaxWidth;
+        text-transform: uppercase;
+
+        @include screenSizes(desktop) {
+            font-size: $base * 6;
+        }
     }
 }
 
 .feature {
-    background-color: $secondaryColor;
+
+    .theme-trans & {
+        background: $transGradientColorOne;
+        background: $transGradientTwo;
+    }
+
+    .theme-bipoc & {
+        background: $bipocGradientColorOne;
+        background: $bipocGradientTwo;
+    }
+
+    .theme-pal & {
+        background: $palGradientColorOne;
+        background: $palGradientTwo;
+    }
+
+    color: $white;
     display: flex;
     flex-wrap: wrap;
     margin-bottom: $base * 8;
@@ -113,7 +133,8 @@ function imageSrc(event) {
         }
 
         p {
-            font-size: $base * 3;
+            font-family: "Inter", sans-serif;
+            font-size: $base * 2.5;
             max-width: 60%;
         }
     }
@@ -141,10 +162,25 @@ function imageSrc(event) {
 
     p {
         font-size: $base * 3;
+        text-transform: uppercase;
     }
 
     > a {
-        background: $primaryColor;
+        .theme-trans & {
+            background: $transGradientColorOne;
+            background: $transGradientTwo;
+        }
+
+        .theme-bipoc & {
+            background: $bipocGradientColorOne;
+            background: $bipocGradientTwo;
+        }
+
+        .theme-pal & {
+            background: $palGradientColorOne;
+            background: $palGradientTwo;
+        }
+
         color: $white;
         cursor: pointer;
         font-size: $base * 3;
@@ -156,36 +192,56 @@ function imageSrc(event) {
 
 .date-buttons {
     display: flex;
-    justify-content: space-between;
+    justify-content: space-evenly;
     flex-flow: wrap;
     width: 90vw;
 
     @include screenSizes(desktop) {
+        justify-content: space-between;
         flex-flow: nowrap;
         width: 100%;
     }
 
     button {
-        background-color: $secondaryColor;
-        border: none;
+        background-color: $white;
+        color: $black;
+        border: 1px solid $black;
         border-radius: 0;
+        box-sizing: border-box;
         cursor: pointer;
         font-size: $base * 2;
         height: $base * 8;
+        margin-bottom: $base;
+        text-transform: uppercase;
         width: $base * 8;
         
         @include screenSizes(desktop) {
+            margin-bottom: 0;
             height: $base * 8;
             width: $base * 8;
         }
 
-        &.active {
-            background: $primaryColor;
-            color: $white;
+        &:hover:not(.active) {
+            border-style: dashed;
         }
 
-        &:not(.active):hover {
-            border: 1px solid $primaryColor;
+        &.active {
+            .theme-trans & {
+                background: $transGradientColorOne;
+                background: $transGradientThree;
+            }
+
+            .theme-bipoc & {
+                background: $bipocGradientColorOne;
+                background: $bipocGradientThree;
+            }
+
+            .theme-pal & {
+                background: $palGradientColorOne;
+                background: $palGradientThree;
+            }
+            border: none;
+            color: $white;
         }
     }
 }
@@ -205,7 +261,7 @@ function imageSrc(event) {
 
 .event {
     align-self: flex-start;
-    border: 1px solid $primaryColor;
+    border: 1px solid $black;
     color: $black;
     display: flex;
     flex-basis: 100%;
@@ -232,7 +288,7 @@ function imageSrc(event) {
     display: flex;
     flex-direction: column;
     padding: $base;
-    font-family: sans-serif;
+    font-family: "Inter", sans-serif;
 
     .event-organisers {
         margin-bottom: $base;
@@ -249,6 +305,7 @@ function imageSrc(event) {
 
         > span {
             text-align: right;
+            text-transform: none;
         }
     }
 
@@ -264,11 +321,26 @@ function imageSrc(event) {
 }
 
 .event-link {
+    .theme-trans & {
+        background: $transGradientColorOne;
+        background: $transGradientThree;
+    }
+
+    .theme-bipoc & {
+        background: $bipocGradientColorOne;
+        background: $bipocGradientThree;
+    }
+
+    .theme-pal & {
+        background: $palGradientColorOne;
+        background: $palGradientThree;
+    }
     border-top: 1px solid $primaryColor;
     display: flex;
-    color: $black;
+    color: $white;
     padding: $base;
     text-align: center;
+    text-transform: uppercase;
     text-decoration: none;
 }
 
@@ -279,9 +351,14 @@ function imageSrc(event) {
     margin-bottom: $base * 4;
 
     p {
-        font-size: $base * 3;
+        font-family: "Inter", sans-serif;
+        font-size: $base * 2;
         text-align: center;
-        max-width: $base * 80;
+        max-width: $base * 50;
+        
+        @include screenSizes(desktop) {
+            max-width: $base * 80;
+        }
     }
 
     h3 {
@@ -291,15 +368,35 @@ function imageSrc(event) {
 
     a {
         color: $white;
+        font-family: 'FIRSTGAYAMERICANS', sans-serif;
+        font-size: $base * 3;
+        text-transform: uppercase;
     }
 
     .questions a {
         color: $black;
+        font-family: "Inter", sans-serif;
+        font-size: $base * 2;
+        text-transform: none;
     }
 }
 
 .form-link {
-    background: $primaryColor;
+    .theme-trans & {
+        background: $transGradientColorOne;
+        background: $transGradientFour;
+    }
+
+    .theme-bipoc & {
+        background: $bipocGradientColorOne;
+        background: $bipocGradientFour;
+    }
+
+    .theme-pal & {
+        background: $palGradientColorOne;
+        background: $palGradientFour;
+    }
+    color: $white;
     padding: $base * 2;
     
     a {
@@ -309,13 +406,28 @@ function imageSrc(event) {
 
 footer {
     justify-content: center;
-    background: $primaryColor;
+    .theme-trans & {
+        background: $transGradientColorOne;
+        background: $transGradientTwo;
+    }
+
+    .theme-bipoc & {
+        background: $bipocGradientColorOne;
+        background: $bipocGradientTwo;
+    }
+
+    .theme-pal & {
+        background: $palGradientColorOne;
+        background: $palGradientTwo;
+    }
+    color: $white;
     display: flex;
     padding: $base 0;
+    text-transform: uppercase;
     width: 100%;
 
     a {
-        color: $black;
+        color: $white;
     }
 }
 </style>

@@ -14,12 +14,27 @@
 
 <style scoped lang="scss">
 nav {
-    background: $primaryColor;
+    .theme-trans & {
+        background: $transGradientColorOne;
+        background: $transGradientOne;
+    }
+
+    .theme-bipoc & {
+        background: $bipocGradientColorOne;
+        background: $bipocGradientOne;
+    }
+
+    .theme-pal & {
+        background: $palGradientColorOne;
+        background: $palGradientOne;
+    }
+
     box-sizing: border-box;
     justify-content: space-between;
     display: flex;
     padding: $base * 4;
     text-transform: uppercase;
+    transition: all 300ms ease-in-out;
     width: 100%;
 }
 
