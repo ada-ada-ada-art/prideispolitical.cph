@@ -154,15 +154,6 @@ function imageSrc(event) {
             }
         }
     }
-
-    .image-container {
-        background-image: url("~/assets/img/anti-fascist-pride.jpg");
-        background-position: center;
-        background-size: cover;
-        border-radius: 100%;
-        height: $base * 30;
-        width: $base * 30;
-    }
 }
 
 .calendar {
