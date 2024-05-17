@@ -1,0 +1,8 @@
+---
+title: On The Other Side of Commercial Pride
+datetime: 2024-08-11T19:00:00+02:00
+organisers: Den Anden Side
+venue: Palads
+img_url: event4.jpg
+url: https://www.instagram.com/nbropride/
+---

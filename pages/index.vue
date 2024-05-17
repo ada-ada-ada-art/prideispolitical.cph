@@ -14,7 +14,7 @@
     </div>
     <div class="calendar">
         <h3>Calendar</h3>
-        <p>{{ eventCount }} events registrered so far</p>
+        <p class="event-count">{{ eventCount }} events registrered so far</p>
         <!-- <div class="date-buttons">
             <button v-for="date in dates" :class="activeDate === date ? 'active' : ''" @click="activeDate = date" v-html="date > 0 ? date + '.<br>AUG' : 'All days' "></button>
         </div> -->
@@ -23,15 +23,19 @@
                 <NuxtLink  target="_blank" :to="event.url" class="event" v-if="activeDate === 0 || new Date(event.datetime).getDate() === activeDate">
                     <div class="event-content">
                         <div class="event-image" :style="imageSrc(event)">
-                            <p class="event-date"><span>{{ new Date(event.datetime).toLocaleDateString('da-DK', { month: 'long', day: 'numeric'}) }}</span></p>
-                            <p class="event-time"><span>{{ new Date(event.datetime).toLocaleTimeString('da-DK', { hour: '2-digit', minute: '2-digit' }) }}</span></p>
-                        </div>
-                        <div class="event-text">
-                            <h4 class="event-title">{{ event.title }}</h4>
-                            <h5 class="event-organisers">by {{ event.organisers }}</h5>
-                            <p class="event-venue"><span>at {{ event.venue }}</span></p>
+                            <div class="event-image-bottom">
+                                <p class="event-date">{{ new Date(event.datetime).toLocaleDateString('da-DK', { month: 'long', day: 'numeric'}) }}</p>
+                                <p class="event-time">{{ new Date(event.datetime).toLocaleTimeString('da-DK', { hour: '2-digit', minute: '2-digit' }) }}</p>
+                            </div>
+                            <div class="event-image-bottom-center">
+                                <!-- <h4 class="event-title">{{ event.title }}</h4> -->
+                                <!-- <p class="event-venue">{{ event.venue }}</p> -->
+                            </div>
                         </div>
                     </div>
+                    <h4 class="event-title">{{ event.title }}</h4>
+                    <p class="event-venue">{{ event.venue }}</p>
+                    <h5 class="event-organisers">Organized by <br/>{{ event.organisers }}</h5>
                     <!-- <span class="event-link" target="_blank" :to="event.url">Click to read more ></span> -->
                 </NuxtLink>
             </template>
@@ -58,7 +62,7 @@ let eventCount = events.value.length
 const img = useImage()
 
 function imageSrc(event) {
-    const imgUrl = img('img/events/' + event.img_url, { width: 300 })
+    const imgUrl = img('img/events/' + event.img_url, { width: 300, grayscale: true })
     return { backgroundImage: `url('${imgUrl}')` }
 }
 </script>
@@ -176,7 +180,7 @@ function imageSrc(event) {
         text-transform: uppercase;
     }
 
-    p {
+    .event-count {
         font-size: $base * 3;
         text-transform: uppercase;
     }
@@ -278,6 +282,7 @@ function imageSrc(event) {
 .event {
     align-self: flex-start;
     box-sizing: border-box;
+    border: 1px solid $black;
     color: $black;
     display: flex;
     flex-basis: 100%;
@@ -287,34 +292,73 @@ function imageSrc(event) {
     position: relative;
     text-decoration: none;
 
+    &:hover {
+        .event-image {
+            background-size: 105% 105%;
+        }
+    }
+
     @include screenSizes(desktop) {
         flex-basis: $base * 40;
     }
 }
 
 .event-image {
-    align-items: flex-end;
     background-position: center;
-    background-size: cover;
+    background-size: 100% 100%;
     display: flex;
+    flex-direction: column;
     height: $base * 30;
     justify-content: space-between;
     position: relative;
+    transition: all 300ms ease-in-out;
     width: 100%;
 
     &:after {
-        background: linear-gradient(to top, #000 0%, rgba(0, 0, 0, 0) 80%);
+        // background: linear-gradient(to top, #000 0%, rgba(0, 0, 0, 0) 80%);
+        .theme-trans & {
+            background: $transGradientThree;
+            opacity: 0.75;
+        }
+
+        .theme-bipoc & {
+            background: $bipocGradientThree;
+            opacity: 0.75;
+        }
+
+        .theme-pal & {
+            background: $palGradientThree;
+            opacity: 0.75;
+        }
+
         bottom: 0;
         content: '';
         left: 0;
-        height: $base * 8;
+        height: 100%;
+        opacity: 0;
         position: absolute;
+        transition: opacity 300ms ease-in-out;
         width: 100%;
     }
 }
 
+.event-image-bottom {
+    align-items: flex-end;
+    display: flex;
+    justify-content: space-between;
+}
+
+.event-image-bottom-center {
+    align-items: flex-end;
+    display: flex;
+    justify-content: center;
+}
+
 .event-date, .event-time {
     color: $white;
+    font-family: 'FIRSTGAYAMERICANS';
+    font-size: $base * 2.5;
+    margin-top: $base;
     z-index: 10;
 }
 
@@ -326,73 +370,54 @@ function imageSrc(event) {
     padding-right: $base;
 }
 
-.event-title {
-    .theme-trans & {
-        background: $transGradientThree;
-        -webkit-background-clip: text;
-        -webkit-text-fill-color: transparent;
-    }
-
-    .theme-bipoc & {
-        background: $bipocGradientThree;
-        -webkit-background-clip: text;
-        -webkit-text-fill-color: transparent;
-    }
-
-    .theme-pal & {
-        background: $palGradientThree;
-        -webkit-background-clip: text;
-        -webkit-text-fill-color: transparent;
-    }
-
-    font-family: 'Proxima Nova', sans-serif;
-    font-size: $base * 3;
-    font-weight: bold;
-    margin-bottom: $base;
-    text-transform: uppercase;
-    z-index: 100;
-}
-
-.event-organisers {
-    font-family: 'Proxima Nova', sans-serif;
-    font-style: italic;
-    font-weight: normal;
-    margin-bottom: $base;
-    text-transform: uppercase;
-    z-index: 100;
-}
-
 .event-time, .event-date, .event-venue {
     align-items: center;
     display: flex;
     flex-direction: column;
-    font-family: 'FIRSTGAYAMERICANS', sans-serif;
-    font-size: $base * 2.5;
     justify-content: space-between;
     margin-bottom: $base;
-
-    > span {
-        font-family: 'Proxima Nova', sans-serif;
-        font-size: $base * 2;
-    }
+    text-transform: uppercase;
 }
 
-.event-text {
-    align-items: center;
-    display: flex;
-    flex-direction: column;
-    font-family: "Proxima Nova", sans-serif;
+.event-title {
+    border-top: 1px solid $black;
+    font-family: 'Proxima Nova', sans-serif;
+    font-size: $base * 3;
+    font-weight: bold;
     padding: $base;
+    text-align: justify;
+    text-align-last: center;
+    text-transform: uppercase;
+}
+
+.event-organisers {
+    font-family: 'Proxima Nova', sans-serif;
+    font-weight: normal;
+    margin-bottom: $base;
     text-align: center;
+    // text-transform: uppercase;
+    z-index: 100;
+}
 
-    p {
-        font-size: $base * 2;
-        margin: 0;
-    }
+.event-venue {
+    box-sizing: border-box;
+    font-family: "Proxima Nova", sans-serif;
+    // color: $white;
+    font-size: $base * 2;
+    margin: 0;
+    padding-bottom: $base * 2;
+    position: relative;
+    text-align: center;
+    text-transform: none;
+    z-index: 100;
 
-    h6 {
-        font-size: $base * 2;
-        font-weight: normal;
+    &:after {
+        background: $black;
+        bottom: $base;
+        content: '';
+        height: 1px;
+        position: absolute;
+        width: 50%;
     }
 }
 
