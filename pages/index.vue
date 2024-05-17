@@ -9,7 +9,7 @@
         </div>
         <div class="feature-text">
             <h3>Find events</h3>
-            <p>Pride is Political helps you find events that support queer liberation for all. <br><br>Events in our network support the fight for international solidarity, justice and universal human rights.</p>
+            <p>Pride is Political helps you find events that support queer liberation for all. <br><br>Events on our platform support the fight for international solidarity, justice and universal human rights.</p>
         </div>
     </div>
     <div class="calendar">
@@ -28,10 +28,10 @@
                             <h5 class="event-organisers">by {{ event.organisers }}</h5>
                             <p class="event-date"><strong>Date</strong><span>{{ new Date(event.datetime).toLocaleDateString('da-DK') }}</span></p>
                             <p class="event-time"><strong>Time</strong><span>{{ new Date(event.datetime).toLocaleTimeString('da-DK', { hour: "2-digit", minute: "2-digit" }) }}</span></p>
-                            <p class="event-venue"><strong>Venue</strong><span>{{ event.venue }}</span></p>
+                            <p class="event-venue"><strong>Place</strong><span>{{ event.venue }}</span></p>
                         </div>
                     </div>
-                    <span class="event-link" target="_blank" :to="event.url">See more ></span>
+                    <span class="event-link" target="_blank" :to="event.url">Click to read more ></span>
                 </NuxtLink>
             </template>
         </div>
@@ -95,28 +95,33 @@ function imageSrc(event) {
 }
 
 .feature {
-
     .theme-trans & {
         background: $transGradientColorOne;
         background: $transGradientTwo;
+        opacity: 1;
     }
 
     .theme-bipoc & {
         background: $bipocGradientColorOne;
         background: $bipocGradientTwo;
+        opacity: 1;
     }
 
     .theme-pal & {
         background: $palGradientColorOne;
         background: $palGradientTwo;
+        opacity: 1;
     }
 
     color: $white;
     display: flex;
     flex-wrap: wrap;
     margin-bottom: $base * 8;
+    opacity: 0;
     padding: $base * 8 0;
     width: 100%;
+
+    transition: opacity 300ms ease-in-out;
 
     > div {
         align-items: center;
@@ -260,12 +265,12 @@ function imageSrc(event) {
     align-items: center;
     display: flex;
     flex-flow: row wrap;
-    justify-content: space-between;
+    justify-content: space-evenly;
     margin-top: $base * 4;
     width: 90vw;
 
     @include screenSizes(desktop) {
-        width: $base * 110;
+        width: 80vw;
     }
 }
 
@@ -284,27 +289,27 @@ function imageSrc(event) {
 
     align-self: flex-start;
     border-style: double;
-    border-width: 3px;
+    border-width: 0;
     box-sizing: border-box;
     color: $black;
     display: flex;
     flex-basis: 100%;
     flex-direction: column;
-    min-height: $base * 40;
-    margin-bottom: $base * 4;
     justify-content: space-between;
+    min-height: $base * 60;
+    margin-bottom: $base * 4;
+    position: relative;
     text-decoration: none;
-    transition: 300ms box-shadow ease-in-out;
 
     @include screenSizes(desktop) {
-        flex-basis: $base * 30;
+        flex-basis: $base * 40;
     }
 }
 
 .event-image {
     background-position: center;
     background-size: cover;
-    height: $base * 15;
+    height: $base * 25;
     width: 100%;
 }
 
@@ -314,17 +319,21 @@ function imageSrc(event) {
     padding: $base;
     font-family: "Proxima Nova", sans-serif;
 
-    .event-organisers {
-        margin-bottom: $base;
-    }
-
     p {
         font-size: $base * 2;
         margin: 0;
     }
 
     .event-title {
-        font-weight: normal;
+        font-size: $base * 3;
+        text-transform: uppercase;
+    }
+
+    .event-organisers {
+        border-bottom: 1px solid $black;
+        font-size: $base * 2;
+        margin-bottom: $base;
+        padding-bottom: $base;
     }
 
     .event-time, .event-date, .event-venue {
@@ -422,23 +431,28 @@ function imageSrc(event) {
     .theme-trans & {
         background: $transGradientColorOne;
         background: $transGradientFour;
+        opacity: 1;
     }
 
     .theme-bipoc & {
         background: $bipocGradientColorOne;
         background: $bipocGradientFour;
+        opacity: 1;
     }
 
     .theme-pal & {
         background: $palGradientColorOne;
         background: $palGradientFour;
+        opacity: 1;
     }
 
     box-sizing: border-box;
     color: $white;
+    opacity: 0;
     padding: $base * 2;
     text-align: center;
     text-decoration: none;
+    transition: opacity 300ms ease-in-out;
     max-width: $baseMaxMobileWidth;
     
     a {
@@ -450,24 +464,29 @@ footer {
     .theme-trans & {
         background: $transGradientColorOne;
         background: $transGradientTwo;
+        opacity: 1;
     }
 
     .theme-bipoc & {
         background: $bipocGradientColorOne;
         background: $bipocGradientTwo;
+        opacity: 1;
     }
 
     .theme-pal & {
         background: $palGradientColorOne;
         background: $palGradientTwo;
+        opacity: 1;
     }
 
     color: $white;
     display: flex;
     justify-content: center;
+    opacity: 0;
     padding: $base 0;
     text-transform: uppercase;
     text-align: center;
+    transition: opacity 300ms ease-in-out;
     width: 100%;
 
     a {

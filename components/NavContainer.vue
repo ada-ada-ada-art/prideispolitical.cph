@@ -17,16 +17,19 @@ nav {
     .theme-trans & {
         background: $transGradientColorOne;
         background: $transGradientOne;
+        opacity: 1;
     }
 
     .theme-bipoc & {
         background: $bipocGradientColorOne;
         background: $bipocGradientOne;
+        opacity: 1;
     }
 
     .theme-pal & {
         background: $palGradientColorOne;
         background: $palGradientOne;
+        opacity: 1;
     }
 
     align-items: center;
@@ -34,9 +37,10 @@ nav {
     justify-content: space-between;
     display: flex;
     flex-direction: column;
+    opacity: 0;
     padding: $base * 4;
     text-transform: uppercase;
-    transition: all 300ms ease-in-out;
+    transition: opacity 300ms ease-in-out;
     width: 100%;
 
     @include screenSizes(desktop) {
