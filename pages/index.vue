@@ -1,6 +1,6 @@
 <template>
     <div class="explainer">
-        <h3>Pride is Political is a network for pride events in Copenhagen that believe in international solidarity, justice and universal human rights.</h3>
+        <h3>Pride is Political is an independent platform for alternative Pride events in Copenhagen. We believe in queer liberation, solidarity and human rights.</h3>
     </div>
     <div class="feature">
         <div class="feature-text">
@@ -389,7 +389,7 @@ function imageSrc(event) {
 
     p {
         font-family: "Proxima Nova", sans-serif;
-        font-size: $base * 2;
+        font-size: $base * 2.5;
         text-align: center;
         max-width: $baseMaxMobileWidth;
         
@@ -413,7 +413,7 @@ function imageSrc(event) {
     .questions a {
         color: $black;
         font-family: "Proxima Nova", sans-serif;
-        font-size: $base * 2;
+        font-size: $base * 2.5;
         text-transform: none;
     }
 }

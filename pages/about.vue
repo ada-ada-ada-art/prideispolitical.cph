@@ -1,18 +1,25 @@
 <template>
     <div>
-        <h2>About PRIDE IS POLITICAL</h2>
-        <p>PRIDE IS POLITICAL is a network for pride events in Copenhagen that believe in international solidarity, justice and universal human rights.</p>
-        <p>Pride has over the years been commodified and made into a marketing strategy for corporations with questionable agendas. With the protests being replaced with rainbow parties, the acceptance of our queer lives became conditional on staying apolitical and palpable to a heteronormative society.</p>
-        <p>Let’s get back to our roots. Let’s demand liberation for ourselves and others around the world. Let’s insist on pride being political.</p>
-        <p>PRIDE IS POLITICAL will promote events that share our values of queer liberation for all. We believe in a community based on solidarity, justice and universal human rights, and want all the community organising efforts to be visible and accessible to everyone.</p>
-        <p>Send us your events, big and small, and we will promote them.</p>
-        <p>All we ask is that you share our hope for a just and equal future.</p>
+        <h2>About</h2>
+        <h3>PRIDE IS POLITICAL – AND ALWAYS HAS BEEN</h3>
+        <p>Over the years, Pride has been commodified and turned into a marketing tool for corporations with questionable agendas.</p>
+        <p>With the protests being replaced with rainbow parties, our queer lives were suddenly sanitised to be palpable to a heteronormative society.</p>
+        <p>Recent events have made this abundantly clear.</p>
+        <p>Copenhagen Pride failed to listen to the community they claim to represent. And after making a series of confusing and contradicting statements, the corporate sponsors showed their true face: their support was conditional on us staying silent while we are watching a genocide unfold.</p>
+        <h3>LET’S GET BACK TO OUR ROOTS!</h3>
+        <p>Let’s demand liberation for ourselves and others around the world. Let’s insist on Pride being political, as it was intended to be.</p>
+        <p>Pride is Political is an independent platform, promoting events that share our values of queer liberation, as well as liberation of others from all forms of oppression.</p>
+        <p>We believe in a community rooted in solidarity, justice and autonomy – and our mission is to make the work of independent community organisers visible and accessible.</p>
+        <h3>OPEN CALL FOR ALTERNATIVE PRIDE EVENTS</h3>
+        <p>We encourage everyone to plan alternative Pride events this summer! And if you do, let us know and we will help you promote them.</p>
+        <p>Our only requirement is that you share our values – and stay away from pinkwashing, commodification of our existence, and for-profit agendas.</p>
+        <p>We are looking for informative talks, inspiring exhibitions, community hang-outs, political demonstrations, parties with intentions, and more!</p>
         <h2>Contact</h2>
         <p>You can get in touch with us on Instagram or on email.</p>
         <p>Instagram: <NuxtLink to="https://instagram.com/prideispolitical.cph">@prideispolitical.cph</NuxtLink></p>
         <p>Email: <NuxtLink to="mailto:prideispolitical.cph@proton.me">prideispolitical.cph@proton.me</NuxtLink></p>
         <h2>Credits</h2>
-        <p>PRIDE IS POLITICAL is a project by <NuxtLink target="_blank" to="https://ada-ada-ada.art">Ada Ada Ada</NuxtLink> and <NuxtLink target="_blank" to="https://simensorthe.dk/">Simen Sorthe</NuxtLink>.</p>
+        <p>Pride is Political is a project by <NuxtLink target="_blank" to="https://ada-ada-ada.art">Ada Ada Ada</NuxtLink> and <NuxtLink target="_blank" to="https://simensorthe.dk/">Simen Sorthe</NuxtLink>.</p>
         <p>Graphic design consulting by <NuxtLink target="_blank" to="https://www.instagram.com/michaellaenger/">Michael Langer</NuxtLink>.</p>
         <p>The main font is FIRSTGAYAMERICANS by <NuxtLink target="_blank" to="https://genderfailpress.info/">GenderFail</NuxtLink>.</p>
         <p>The secondary font is Proxima Nova by <NuxtLink target="_blank" to="https://www.marksimonson.com/">Mark Simonson</NuxtLink>.</p>
@@ -32,6 +39,11 @@ div {
 h2 {
     font-size: $base * 4;
     text-align: center;
+    text-transform: uppercase;
+}
+
+h3 {
+    font-size: $base * 3;
     text-transform: uppercase;
 }
 

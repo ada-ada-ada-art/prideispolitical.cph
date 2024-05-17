@@ -11,7 +11,7 @@ export default defineNuxtConfig({
   // Global page headers: https://go.nuxtjs.dev/config-head
   app: {
     head: {
-      title: 'Pride is Political Copenhagen — A network of intersectional pride events',
+      title: 'Pride is Political — Independent platform for alternative Pride events in Copenhagen',
       htmlAttrs: {
         lang: 'en'
       },

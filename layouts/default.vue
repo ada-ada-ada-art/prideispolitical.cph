@@ -14,8 +14,6 @@ export default {
         }
     },
     mounted () {
-        console.log('hellooooo')
-
         let colorSchemeDie = Math.random()
         if(colorSchemeDie < 0.33) {
             this.colorScheme = 'trans'
@@ -32,9 +30,9 @@ export default {
 </script>
 <style scoped lang="scss">
 main {
-align-items: center;
-display: flex;
-flex-direction: column;
-justify-content: center;
+    align-items: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
 }
 </style>
