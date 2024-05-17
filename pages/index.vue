@@ -27,10 +27,6 @@
                                 <p class="event-date">{{ new Date(event.datetime).toLocaleDateString('da-DK', { month: 'long', day: 'numeric'}) }}</p>
                                 <p class="event-time">{{ new Date(event.datetime).toLocaleTimeString('da-DK', { hour: '2-digit', minute: '2-digit' }) }}</p>
                             </div>
-                            <div class="event-image-bottom-center">
-                                <!-- <h4 class="event-title">{{ event.title }}</h4> -->
-                                <!-- <p class="event-venue">{{ event.venue }}</p> -->
-                            </div>
                         </div>
                     </div>
                     <h4 class="event-title">{{ event.title }}</h4>
@@ -293,41 +289,43 @@ function imageSrc(event) {
     text-decoration: none;
 
     &:hover {
-        .event-image {
-            background-size: 105% 105%;
+        .event-image:after {
+            background-size: 200%;
         }
     }
 
     @include screenSizes(desktop) {
-        flex-basis: $base * 40;
+        flex-basis: $base * 50;
     }
 }
 
 .event-image {
     background-position: center;
-    background-size: 100% 100%;
+    background-size: cover;
     display: flex;
     flex-direction: column;
     height: $base * 30;
     justify-content: space-between;
     position: relative;
-    transition: all 300ms ease-in-out;
     width: 100%;
 
     &:after {
         // background: linear-gradient(to top, #000 0%, rgba(0, 0, 0, 0) 80%);
         .theme-trans & {
-            background: $transGradientThree;
+            background: $transGradientOne;
+            background-size: 100%;
             opacity: 0.75;
         }
 
         .theme-bipoc & {
-            background: $bipocGradientThree;
+            background: $bipocGradientOne;
+            background-size: 100%;
             opacity: 0.75;
         }
 
         .theme-pal & {
-            background: $palGradientThree;
+            background: $palGradientOne;
+            background-size: 100%;
             opacity: 0.75;
         }
 
@@ -337,7 +335,7 @@ function imageSrc(event) {
         height: 100%;
         opacity: 0;
         position: absolute;
-        transition: opacity 300ms ease-in-out;
+        transition: all 300ms ease-in-out;
         width: 100%;
     }
 }
@@ -346,12 +344,6 @@ function imageSrc(event) {
     align-items: flex-end;
     display: flex;
     justify-content: space-between;
-}
-
-.event-image-bottom-center {
-    align-items: flex-end;
-    display: flex;
-    justify-content: center;
 }
 
 .event-date, .event-time {
@@ -385,7 +377,7 @@ function imageSrc(event) {
     font-size: $base * 3;
     font-weight: bold;
     padding: $base;
-    text-align: justify;
+    text-align: center;
     text-align-last: center;
     text-transform: uppercase;
 }
@@ -394,8 +386,8 @@ function imageSrc(event) {
     font-family: 'Proxima Nova', sans-serif;
     font-weight: normal;
     margin-bottom: $base;
+    padding: 0 $base;
     text-align: center;
-    // text-transform: uppercase;
     z-index: 100;
 }
 
