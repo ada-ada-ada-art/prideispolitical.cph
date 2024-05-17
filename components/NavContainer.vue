@@ -29,26 +29,41 @@ nav {
         background: $palGradientOne;
     }
 
+    align-items: center;
     box-sizing: border-box;
     justify-content: space-between;
     display: flex;
+    flex-direction: column;
     padding: $base * 4;
     text-transform: uppercase;
     transition: all 300ms ease-in-out;
     width: 100%;
+
+    @include screenSizes(desktop) {
+        align-items: normal;
+        flex-direction: row;
+    }
 }
 
 h1 {
     font-size: $base * 6;
-    text-align: left;
+    text-align: center;
     text-transform: uppercase;
+
+    @include screenSizes(desktop) {
+        text-align: left;
+    }
 }
 
 h2 {
     font-size: $base * 2;
     font-weight: normal;
-    text-align: left;
+    text-align: center;
     text-transform: uppercase;
+
+    @include screenSizes(desktop) {
+        text-align: left;
+    }
 }
 
 a {
@@ -59,6 +74,11 @@ a {
 .link-container {
     align-items: center;
     display: flex;
+    margin-top: $base * 2;
+
+    @include screenSizes(desktop) {
+        margin-top: 0;
+    }
 }
 
 .link-container a {

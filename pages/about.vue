@@ -13,15 +13,16 @@
         <p>Email: <NuxtLink to="mailto:prideispolitical.cph@proton.me">prideispolitical.cph@proton.me</NuxtLink></p>
         <h2>Credits</h2>
         <p>PRIDE IS POLITICAL is a project by <NuxtLink target="_blank" to="https://ada-ada-ada.art">Ada Ada Ada</NuxtLink> and <NuxtLink target="_blank" to="https://simensorthe.dk/">Simen Sorthe</NuxtLink>.</p>
-        <p>Graphic design by <NuxtLink target="_blank" to="https://www.instagram.com/michaellaenger/">Michael Langer</NuxtLink>.</p>
-        <p>The font is FIRSTGAYAMERICANS by <NuxtLink target="_blank" to="https://genderfailpress.info/">GenderFail</NuxtLink>.</p>
+        <p>Graphic design consulting by <NuxtLink target="_blank" to="https://www.instagram.com/michaellaenger/">Michael Langer</NuxtLink>.</p>
+        <p>The main font is FIRSTGAYAMERICANS by <NuxtLink target="_blank" to="https://genderfailpress.info/">GenderFail</NuxtLink>.</p>
+        <p>The secondary font is Proxima Nova by <NuxtLink target="_blank" to="https://www.marksimonson.com/">Mark Simonson</NuxtLink>.</p>
     </div>
 </template>
 
 <style lang="scss" scoped>
 div {
     margin-top: $base * 4;
-    max-width: $baseMaxMobileWidth;
+    max-width: 90vw;
     
     @include screenSizes(desktop) {
         max-width: $baseMaxWidth;

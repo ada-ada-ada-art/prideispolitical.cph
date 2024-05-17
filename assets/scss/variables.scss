@@ -1,7 +1,7 @@
 // Sizes
 $base: 8px;
 $baseMaxWidth: $base * 120;
-$baseMaxMobileWidth: $base * 50;
+$baseMaxMobileWidth: 90vw;
 
 // Colors
 $black: #000;
@@ -12,27 +12,27 @@ $mainBg: #FFF;
 $primaryColor: dimgrey; // Saturated lavender
 $secondaryColor: lightgrey; // Light lavendar
 
-$transGradientColorOne: rgba(215,152,166,1);
+$transGradientColorOne: rgba(245, 169, 184, 1);
 $transGradientColorTwo: #FFF;
-$transGradientColorThree: rgba(103,186,208,1);
+$transGradientColorThree: rgba(91, 206, 250, 1);
 
 $transGradientOne: radial-gradient(circle at 20% 50%, $transGradientColorOne 0%, $transGradientColorThree 100%);
 $transGradientTwo: radial-gradient(circle at 60% 70%, $transGradientColorOne 0%, $transGradientColorThree 100%);
 $transGradientThree: radial-gradient(circle at 40% 50%, $transGradientColorOne 20%, $transGradientColorThree 100%);
 $transGradientFour: radial-gradient(circle at 80% 20%, $transGradientColorOne 0%, $transGradientColorThree 100%);
 
-$bipocGradientColorOne: rgba(13, 6, 2, 1);
+$bipocGradientColorOne: rgba(0, 0, 0, 1);
 $bipocGradientColorTwo: #FFF;
-$bipocGradientColorThree: rgba(82, 43, 14, 1);
+$bipocGradientColorThree: rgba(97, 57, 21, 1);
 
 $bipocGradientOne: radial-gradient(circle at 20% 50%, $bipocGradientColorOne 0%, $bipocGradientColorThree 100%);
 $bipocGradientTwo: radial-gradient(circle at 60% 70%, $bipocGradientColorOne 0%, $bipocGradientColorThree 100%);
 $bipocGradientThree: radial-gradient(circle at 40% 50%, $bipocGradientColorOne 20%, $bipocGradientColorThree 100%);
 $bipocGradientFour: radial-gradient(circle at 80% 20%, $bipocGradientColorOne 0%, $bipocGradientColorThree 100%);
 
-$palGradientColorOne: rgba(74, 135, 52, 1);
-$palGradientColorTwo: #FFF;
-$palGradientColorThree: rgba(200, 55, 39, 1);
+$palGradientColorOne: rgba(20, 153, 84, 1);
+$palGradientColorTwo: #000;
+$palGradientColorThree: rgba(228, 49, 43, 1);
 
 $palGradientOne: radial-gradient(circle at 20% 50%, $palGradientColorOne 0%, $palGradientColorThree 100%);
 $palGradientTwo: radial-gradient(circle at 60% 70%, $palGradientColorOne 0%, $palGradientColorThree 100%);

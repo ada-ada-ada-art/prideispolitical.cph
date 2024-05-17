@@ -1,23 +1,23 @@
 <template>
     <div class="explainer">
-        <h3>PRIDE IS POLITICAL is a network for pride events in Copenhagen that believe in international solidarity, justice and universal human rights.</h3>
+        <h3>Pride is Political is a network for pride events in Copenhagen that believe in international solidarity, justice and universal human rights.</h3>
     </div>
     <div class="feature">
         <div class="feature-text">
             <h3>Share your events</h3>
-            <p>PRIDE IS POLITICAL promotes events that share our values of queer liberation for all. <br><br>Send us your events, big and small, and we will help share them with the community.</p>
+            <p>Pride is Political promotes events that share our values of queer liberation for all. <br><br>Send us your events, big and small, and we will help share them with the community.</p>
         </div>
         <div class="feature-text">
             <h3>Find events</h3>
-            <p>PRIDE IS POLITICAL helps you find events that support queer liberation for all. <br><br>Events in our network support the fight for international solidarity, justice and universal human rights.</p>
+            <p>Pride is Political helps you find events that support queer liberation for all. <br><br>Events in our network support the fight for international solidarity, justice and universal human rights.</p>
         </div>
     </div>
     <div class="calendar">
         <h3>Calendar</h3>
         <p>{{ eventCount }} events registrered so far</p>
-        <div class="date-buttons">
+        <!-- <div class="date-buttons">
             <button v-for="date in dates" :class="activeDate === date ? 'active' : ''" @click="activeDate = date" v-html="date > 0 ? date + '.<br>AUG' : 'All days' "></button>
-        </div>
+        </div> -->
         <div class="events-container">
             <template v-for="event in events">
                 <NuxtLink  target="_blank" :to="event.url" class="event" v-if="activeDate === 0 || new Date(event.datetime).getDate() === activeDate">
@@ -26,9 +26,9 @@
                         <div class="event-text">
                             <h4 class="event-title">{{ event.title }}</h4>
                             <h5 class="event-organisers">by {{ event.organisers }}</h5>
-                            <p class="event-date"><strong>Date:</strong><span>{{ new Date(event.datetime).toLocaleDateString('da-DK') }}</span></p>
-                            <p class="event-time"><strong>Time:</strong><span>{{ new Date(event.datetime).toLocaleTimeString('da-DK', { hour: "2-digit", minute: "2-digit" }) }}</span></p>
-                            <p class="event-venue"><strong>Venue:</strong><span>{{ event.venue }}</span></p>
+                            <p class="event-date"><strong>Date</strong><span>{{ new Date(event.datetime).toLocaleDateString('da-DK') }}</span></p>
+                            <p class="event-time"><strong>Time</strong><span>{{ new Date(event.datetime).toLocaleTimeString('da-DK', { hour: "2-digit", minute: "2-digit" }) }}</span></p>
+                            <p class="event-venue"><strong>Venue</strong><span>{{ event.venue }}</span></p>
                         </div>
                     </div>
                     <span class="event-link" target="_blank" :to="event.url">See more ></span>
@@ -38,12 +38,12 @@
     </div>
     <div class="submission" id="submission">
         <h3>Submit your event</h3>
-        <p>To get your event onto the PRIDE IS POLITICAL calendar, we ask you to fill out a brief form with some basic information about your event.</p>
-        <p class="form-link"><NuxtLink to="https://forms.zohopublic.eu/prideispoliticalcph/form/PRIDEISPOLITICAL2024/formperma/abHwwjwNIOTzTcV3VWHu9od-8viYKQZeJs4PLaYIe9s" target="_blank">Click here to find our event submission form</NuxtLink></p>
+        <p>To get your event onto the Pride is Political calendar, we ask you to fill out a brief form with some basic information about your event.</p>
+        <NuxtLink class="form-link" to="https://forms.zohopublic.eu/prideispoliticalcph/form/PRIDEISPOLITICAL2024/formperma/abHwwjwNIOTzTcV3VWHu9od-8viYKQZeJs4PLaYIe9s" target="_blank">Click here to find our event submission form</NuxtLink>
         <p class="questions">If you have any questions about the form, <br><NuxtLink to="/about">click here to find our contact information</NuxtLink>.</p>
     </div>
     <footer>
-        <p>PRIDE IS POLITICAL is a project by <NuxtLink target="_blank" to="https://ada-ada-ada.art">Ada Ada Ada</NuxtLink> and <NuxtLink target="_blank" to="https://simensorthe.dk/">Simen Sorthe</NuxtLink>.</p>
+        <p>Pride is Political is a project by <NuxtLink target="_blank" to="https://ada-ada-ada.art">Ada Ada Ada</NuxtLink> and <NuxtLink target="_blank" to="https://simensorthe.dk/">Simen Sorthe</NuxtLink>.</p>
     </footer>
 </template>
 
@@ -69,21 +69,27 @@ function imageSrc(event) {
     color: $white;
     display: flex;
     flex-direction: column;
-    padding: $base * 8 0;
-    margin: $base * 4 0;
+    margin: $base * 2 0;
+    padding: $base * 6 0;
     text-align: center;
     width: 100%;
+
+    @include screenSizes(desktop) {
+        font-size: $base * 6;
+        margin: $base * 4 0;
+    }
     
     h3 {
         color: black;
         font-weight: bold;
         font-style: italic;
-        font-size: $base * 4;
-        max-width: $baseMaxWidth;
+        font-size: $base * 3;
+        max-width: $baseMaxMobileWidth;
         text-transform: uppercase;
 
         @include screenSizes(desktop) {
             font-size: $base * 6;
+            max-width: $baseMaxWidth;
         }
     }
 }
@@ -133,9 +139,13 @@ function imageSrc(event) {
         }
 
         p {
-            font-family: "Inter", sans-serif;
+            font-family: "Proxima Nova", sans-serif;
             font-size: $base * 2.5;
-            max-width: 60%;
+            max-width: $baseMaxMobileWidth;
+
+            @include screenSizes(desktop) {
+                max-width: 60%;
+            }
         }
     }
 
@@ -260,8 +270,22 @@ function imageSrc(event) {
 }
 
 .event {
+    .theme-trans & {
+        border-color: $transGradientColorOne;
+    }
+
+    .theme-bipoc & {
+        border-color: $bipocGradientColorOne;
+    }
+
+    .theme-pal & {
+        border-color: $palGradientColorOne;
+    }
+
     align-self: flex-start;
-    border: 1px solid $black;
+    border-style: double;
+    border-width: 3px;
+    box-sizing: border-box;
     color: $black;
     display: flex;
     flex-basis: 100%;
@@ -288,7 +312,7 @@ function imageSrc(event) {
     display: flex;
     flex-direction: column;
     padding: $base;
-    font-family: "Inter", sans-serif;
+    font-family: "Proxima Nova", sans-serif;
 
     .event-organisers {
         margin-bottom: $base;
@@ -299,13 +323,21 @@ function imageSrc(event) {
         margin: 0;
     }
 
+    .event-title {
+        font-weight: normal;
+    }
+
     .event-time, .event-date, .event-venue {
+        align-items: center;
         display: flex;
+        font-family: 'FIRSTGAYAMERICANS', sans-serif;
+        font-size: $base * 2.5;
         justify-content: space-between;
 
         > span {
+            font-family: 'Proxima Nova', sans-serif;
+            font-size: $base * 2;
             text-align: right;
-            text-transform: none;
         }
     }
 
@@ -324,18 +356,23 @@ function imageSrc(event) {
     .theme-trans & {
         background: $transGradientColorOne;
         background: $transGradientThree;
+        border-color: $transGradientColorOne;
     }
 
     .theme-bipoc & {
         background: $bipocGradientColorOne;
         background: $bipocGradientThree;
+        border-color: $bipocGradientColorOne;
     }
 
     .theme-pal & {
         background: $palGradientColorOne;
         background: $palGradientThree;
+        border-color: $palGradientColorOne;
     }
-    border-top: 1px solid $primaryColor;
+    border-style: double;
+    border-width: 0;
+    box-sizing: border-box;
     display: flex;
     color: $white;
     padding: $base;
@@ -351,10 +388,10 @@ function imageSrc(event) {
     margin-bottom: $base * 4;
 
     p {
-        font-family: "Inter", sans-serif;
+        font-family: "Proxima Nova", sans-serif;
         font-size: $base * 2;
         text-align: center;
-        max-width: $base * 50;
+        max-width: $baseMaxMobileWidth;
         
         @include screenSizes(desktop) {
             max-width: $base * 80;
@@ -375,7 +412,7 @@ function imageSrc(event) {
 
     .questions a {
         color: $black;
-        font-family: "Inter", sans-serif;
+        font-family: "Proxima Nova", sans-serif;
         font-size: $base * 2;
         text-transform: none;
     }
@@ -396,8 +433,13 @@ function imageSrc(event) {
         background: $palGradientColorOne;
         background: $palGradientFour;
     }
+
+    box-sizing: border-box;
     color: $white;
     padding: $base * 2;
+    text-align: center;
+    text-decoration: none;
+    max-width: $baseMaxMobileWidth;
     
     a {
         text-decoration: none;
@@ -405,7 +447,6 @@ function imageSrc(event) {
 }
 
 footer {
-    justify-content: center;
     .theme-trans & {
         background: $transGradientColorOne;
         background: $transGradientTwo;
@@ -420,10 +461,13 @@ footer {
         background: $palGradientColorOne;
         background: $palGradientTwo;
     }
+
     color: $white;
     display: flex;
+    justify-content: center;
     padding: $base 0;
     text-transform: uppercase;
+    text-align: center;
     width: 100%;
 
     a {
