@@ -376,7 +376,7 @@ function imageSrc(event) {
 .event-organisers {
     font-family: 'Proxima Nova', sans-serif;
     font-weight: normal;
-    margin-bottom: $base;
+    margin-bottom: $base * 2;
     padding: 0 $base;
     text-align: center;
     z-index: 100;
@@ -388,7 +388,7 @@ function imageSrc(event) {
     // color: $white;
     font-size: $base * 2;
     margin: 0;
-    padding-bottom: $base * 2;
+    padding: $base 0 ($base * 2);
     position: relative;
     text-align: center;
     text-transform: none;
