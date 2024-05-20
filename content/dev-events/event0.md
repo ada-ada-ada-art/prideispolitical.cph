@@ -4,5 +4,6 @@ datetime: 2024-08-10T19:00:00+02:00
 organisers: Nørrebro Pride
 venue: Nørrebro Station, Nørrebros Runddel, Skt. Hans Torv, Dronning Louises Bro
 img_url: event0.jpg
-url: https://www.instagram.com/nbropride/
+main_url: https://instagram.com/nbropride/
+secondary_url: https://billetto.dk
 ---

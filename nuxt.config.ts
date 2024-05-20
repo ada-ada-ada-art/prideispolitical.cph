@@ -25,6 +25,11 @@ export default defineNuxtConfig({
         {
           name: 'format-detection',
           content: 'telephone=no'
+        },
+        {
+          hid: 'og:image',
+          name: 'og:image',
+          content: '/share-image.png'
         }
       ],
       link: [{
@@ -53,7 +58,12 @@ export default defineNuxtConfig({
           rel: 'manifest',
           href: '/site.webmanifest'
         }
-      ]
+      ],
+      script: [{
+        src: 'https://scripts.withcabin.com/hello.js',
+        async: true,
+        defer: true
+      }]
     },
   },
 

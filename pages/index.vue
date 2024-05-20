@@ -20,7 +20,7 @@
         </div> -->
         <div class="events-container">
             <template v-for="event in events">
-                <NuxtLink  target="_blank" :to="event.url" class="event" v-if="activeDate === 0 || new Date(event.datetime).getDate() === activeDate">
+                <div target="_blank" :to="event.url" class="event" v-if="activeDate === 0 || new Date(event.datetime).getDate() === activeDate">
                     <div class="event-content">
                         <div class="event-image" :style="imageSrc(event)">
                             <div class="event-image-bottom">
@@ -32,8 +32,11 @@
                     <h4 class="event-title">{{ event.title }}</h4>
                     <p class="event-venue">{{ event.venue }}</p>
                     <h5 class="event-organisers">Organized by <br/>{{ event.organisers }}</h5>
-                    <!-- <span class="event-link" target="_blank" :to="event.url">Click to read more ></span> -->
-                </NuxtLink>
+                    <div class="event-link-container">
+                        <NuxtLink class="event-link" target="_blank" :to="event.main_url">{{ getDomainName(event.main_url) }}</NuxtLink>
+                        <NuxtLink v-if="event.secondary_url" class="event-link" target="_blank" :to="event.secondary_url">{{ getDomainName(event.secondary_url) }}</NuxtLink>
+                    </div>
+                </div>
             </template>
         </div>
     </div>
@@ -52,7 +55,9 @@
 let activeDate = ref(0)
 let dates = [0, 10, 11, 12, 13, 14, 15, 16, 17, 18]
 
-const { data: events } = await useAsyncData('events', () => queryContent('/events').sort({datetime: 1}).find())
+const isDev = process.dev
+let eventFolder = isDev ? 'dev-events' : 'events'
+const { data: events } = await useAsyncData(eventFolder, () => queryContent('/' + eventFolder).sort({datetime: 1}).find())
 let eventCount = events.value.length
 
 const img = useImage()
@@ -60,6 +65,11 @@ const img = useImage()
 function imageSrc(event) {
     const imgUrl = img('img/events/' + event.img_url, { width: 300, grayscale: true })
     return { backgroundImage: `url('${imgUrl}')` }
+}
+
+function getDomainName(link:string) {
+    let url = new URL(link)
+    return url.hostname
 }
 </script>
 
@@ -279,12 +289,6 @@ function imageSrc(event) {
     position: relative;
     text-decoration: none;
 
-    &:hover {
-        .event-image:after {
-            background-size: 200%;
-        }
-    }
-
     @include screenSizes(desktop) {
         flex-basis: $base * 50;
     }
@@ -404,33 +408,50 @@ function imageSrc(event) {
     }
 }
 
+.event-link-container {
+    justify-content: space-evenly;
+    display: flex;
+    margin-bottom: $base * 2;
+    padding: 0 $base * 2;
+}
+
 .event-link {
     .theme-trans & {
         background: $transGradientColorOne;
         background: $transGradientThree;
         border-color: $transGradientColorOne;
+        background-size: 100%;
+        transition: all 300ms ease-in-out;
     }
 
     .theme-bipoc & {
         background: $bipocGradientColorOne;
         background: $bipocGradientThree;
         border-color: $bipocGradientColorOne;
+        background-size: 100%;
+        transition: all 300ms ease-in-out;
     }
 
     .theme-pal & {
         background: $palGradientColorOne;
         background: $palGradientThree;
         border-color: $palGradientColorOne;
+        background-size: 100%;
+        transition: all 300ms ease-in-out;
     }
     border-style: double;
     border-width: 0;
     box-sizing: border-box;
-    display: flex;
     color: $white;
+    flex-basis: 40%;
     padding: $base;
     text-align: center;
     text-transform: uppercase;
     text-decoration: none;
+
+    &:hover {
+        background-size: 200%;
+    }
 }
 
 .submission {
