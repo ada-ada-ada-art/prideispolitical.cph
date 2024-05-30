@@ -71,6 +71,24 @@ function getDomainName(link:string) {
     let url = new URL(link)
     return url.hostname
 }
+
+let desc = 'Pride is Political is an independent platform for alternative Pride events in Copenhagen. We believe in queer liberation, solidarity and human rights.'
+useSeoMeta({
+    ogTitle: 'Pride is Political — Independent platform for alternative Pride events in Copenhagen',
+    description: desc,
+    ogDescription: desc,
+    ogType: 'website',
+    ogUrl: 'https://prideispolitical.dk',
+    ogImage: '/share-image.png'
+})
+
+useHead({
+    title: 'Pride is Political — Independent platform for alternative Pride events in Copenhagen',
+    link: [{
+        rel: 'canonical',
+        href: 'https://prideispolitical.dk'
+    }]
+})
 </script>
 
 <style scoped lang="scss">
