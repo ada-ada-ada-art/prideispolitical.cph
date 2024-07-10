@@ -1,6 +1,6 @@
 <template>
     <div class="explainer">
-        <h3>Pride is Political is an independent platform for alternative Pride events in Copenhagen. We believe in queer liberation, solidarity and human rights.</h3>
+        <h3>Pride is Political is a decentralized festival of autonomous pride events in CPH. <br>You host, we share it with the community. We believe in queer liberation, solidarity and human rights.</h3>
     </div>
     <div class="feature">
         <div class="feature-text">
