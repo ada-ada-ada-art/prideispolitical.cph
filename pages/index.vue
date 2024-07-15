@@ -14,7 +14,7 @@
     </div>
     <div class="calendar">
         <h3>Calendar</h3>
-        <p class="event-count">{{ eventCount }} events registrered so far</p>
+        <p class="event-count">{{ eventCount }} event{{ eventCount === 1 ? '' : 's' }} registrered so far</p>
         <!-- <div class="date-buttons">
             <button v-for="date in dates" :class="activeDate === date ? 'active' : ''" @click="activeDate = date" v-html="date > 0 ? date + '.<br>AUG' : 'All days' "></button>
         </div> -->
@@ -55,7 +55,8 @@
 let activeDate = ref(0)
 let dates = [0, 10, 11, 12, 13, 14, 15, 16, 17, 18]
 
-const isDev = process.dev
+let isDev = process.dev
+// isDev = false
 let eventFolder = isDev ? 'dev-events' : 'events'
 const { data: events } = await useAsyncData(eventFolder, () => queryContent('/' + eventFolder).sort({datetime: 1}).find())
 let eventCount = events.value.length
@@ -327,19 +328,19 @@ useHead({
         .theme-trans & {
             background: $transGradientOne;
             background-size: 100%;
-            opacity: 0.75;
+            opacity: 0.5;
         }
 
         .theme-bipoc & {
             background: $bipocGradientOne;
             background-size: 100%;
-            opacity: 0.75;
+            opacity: 0.5;
         }
 
         .theme-pal & {
             background: $palGradientOne;
             background-size: 100%;
-            opacity: 0.75;
+            opacity: 0.5;
         }
 
         bottom: 0;
