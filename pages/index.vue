@@ -56,7 +56,7 @@ let activeDate = ref(0)
 let dates = [0, 10, 11, 12, 13, 14, 15, 16, 17, 18]
 
 let isDev = process.dev
-// isDev = false
+isDev = false
 let eventFolder = isDev ? 'dev-events' : 'events'
 const { data: events } = await useAsyncData(eventFolder, () => queryContent('/' + eventFolder).sort({datetime: 1}).find())
 let eventCount = events.value.length
