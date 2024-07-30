@@ -47,7 +47,7 @@
         <p class="questions">If you have any questions about the form, <br><NuxtLink to="/about">click here to find our contact information</NuxtLink>.</p>
     </div>
     <footer>
-        <p>Pride is Political is a project by <NuxtLink target="_blank" to="https://ada-ada-ada.art">Ada Ada Ada</NuxtLink> and <NuxtLink target="_blank" to="https://simensorthe.dk/">Simen Sorthe</NuxtLink>.</p>
+        <p>Pride is Political is a project by <NuxtLink target="_blank" to="https://ada-ada-ada.art">Ada Ada Ada</NuxtLink> and friends.</p>
     </footer>
 </template>
 
@@ -64,7 +64,7 @@ let eventCount = events.value.length
 const img = useImage()
 
 function imageSrc(event) {
-    const imgUrl = img('img/events/' + event.img_url, { width: 300, grayscale: true })
+    const imgUrl = img('img/events/' + event.img_url, { width: 600, grayscale: true })
     return { backgroundImage: `url('${imgUrl}')` }
 }
 
