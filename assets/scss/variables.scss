@@ -39,6 +39,15 @@ $palGradientTwo: radial-gradient(circle at 60% 70%, $palGradientColorOne 0%, $pa
 $palGradientThree: radial-gradient(circle at 40% 50%, $palGradientColorOne 20%, $palGradientColorThree 100%);
 $palGradientFour: radial-gradient(circle at 80% 20%, $palGradientColorOne 0%, $palGradientColorThree 100%);
 
+$lezGradientColorOne: rgba(255, 154, 86);
+$lezGradientColorTwo: #fff;
+$lezGradientColorThree: rgba(209, 98, 164);
+
+$lezGradientOne: radial-gradient(circle at 20% 50%, $lezGradientColorOne 0%, $lezGradientColorThree 100%);
+$lezGradientTwo: radial-gradient(circle at 70% 70%, $lezGradientColorOne 0%, $lezGradientColorThree 100%);
+$lezGradientThree: radial-gradient(circle at 40% 50%, $lezGradientColorOne 20%, $lezGradientColorThree 100%);
+$lezGradientFour: radial-gradient(circle at 80% 20%, $lezGradientColorOne 0%, $lezGradientColorThree 100%);
+
 // Mixins
 /*
   Uses mobile-first approach.

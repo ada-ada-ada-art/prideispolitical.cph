@@ -32,6 +32,12 @@ nav {
         opacity: 1;
     }
 
+    .theme-lez & {
+        background: $lezGradientColorOne;
+        background: $lezGradientOne;
+        opacity: 1;
+    }
+
     align-items: center;
     box-sizing: border-box;
     justify-content: space-between;

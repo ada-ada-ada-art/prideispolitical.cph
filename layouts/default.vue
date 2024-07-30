@@ -14,16 +14,8 @@ export default {
         }
     },
     mounted () {
-        let colorSchemeDie = Math.random()
-        if(colorSchemeDie < 0.33) {
-            this.colorScheme = 'trans'
-        }
-        else if (colorSchemeDie < 0.66) {
-            this.colorScheme = 'bipoc'
-        }
-        else {
-            this.colorScheme = 'pal'
-        }
+        let colorSchemes = ['trans', 'bipoc', 'lez', 'pal']
+        this.colorScheme = colorSchemes[Math.floor(Math.random() * colorSchemes.length)]
     }
 }
 

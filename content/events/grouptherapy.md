@@ -1,6 +1,6 @@
 ---
 title: Group Therapy - Reclaim your pride
-datetime: 2024-08-09T16:00:00+02:00
+datetime: 2024-08-17T21:45:00+02:00
 organisers: Group Therapy
 venue: Den Anden Side
 img_url: grouptherapy/grouptherapy.jpg

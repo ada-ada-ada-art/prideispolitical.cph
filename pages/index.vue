@@ -143,6 +143,12 @@ useHead({
         opacity: 1;
     }
 
+    .theme-lez & {
+        background: $lezGradientColorOne;
+        background: $lezGradientTwo;
+        opacity: 1;
+    }
+
     color: $white;
     display: flex;
     flex-wrap: wrap;
@@ -217,6 +223,11 @@ useHead({
             background: $palGradientTwo;
         }
 
+        .theme-lez & {
+            background: $lezGradientColorOne;
+            background: $lezGradientTwo;
+        }
+
         color: $white;
         cursor: pointer;
         font-size: $base * 3;
@@ -276,6 +287,12 @@ useHead({
                 background: $palGradientColorOne;
                 background: $palGradientThree;
             }
+
+            .theme-lez & {
+                background: $lezGradientColorOne;
+                background: $lezGradientThree;
+            }
+
             border: none;
             color: $white;
         }
@@ -339,6 +356,12 @@ useHead({
 
         .theme-pal & {
             background: $palGradientOne;
+            background-size: 100%;
+            opacity: 0.5;
+        }
+
+        .theme-lez & {
+            background: $lezGradientOne;
             background-size: 100%;
             opacity: 0.5;
         }
@@ -458,6 +481,15 @@ useHead({
         background-size: 100%;
         transition: all 300ms ease-in-out;
     }
+
+    .theme-lez & {
+        background: $lezGradientColorOne;
+        background: $lezGradientThree;
+        border-color: $lezGradientColorOne;
+        background-size: 100%;
+        transition: all 300ms ease-in-out;
+    }
+
     border-style: double;
     border-width: 0;
     box-sizing: border-box;
@@ -529,6 +561,12 @@ useHead({
         opacity: 1;
     }
 
+    .theme-lez & {
+        background: $lezGradientColorOne;
+        background: $lezGradientFour;
+        opacity: 1;
+    }
+
     box-sizing: border-box;
     color: $white;
     opacity: 0;
@@ -559,6 +597,12 @@ footer {
     .theme-pal & {
         background: $palGradientColorOne;
         background: $palGradientTwo;
+        opacity: 1;
+    }
+
+    .theme-lez & {
+        background: $lezGradientColorOne;
+        background: $lezGradientTwo;
         opacity: 1;
     }
 
