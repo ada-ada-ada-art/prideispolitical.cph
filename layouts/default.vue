@@ -68,6 +68,16 @@ let themes = [
         gradientThree: [40, 50, 20, 100],
         gradientFour: [80, 20, 0, 100]
     },
+    {
+        name: 'gay',
+        colorOne: 'rgba(38, 206, 170)',
+        colorTwo: 'rgba(80, 73, 204)',
+
+        gradientOne: [20, 50, 0, 100],
+        gradientTwo: [70, 70, 0, 100],
+        gradientThree: [40, 50, 20, 100],
+        gradientFour: [80, 20, 0, 100]
+    },
 ]
 
 export default {

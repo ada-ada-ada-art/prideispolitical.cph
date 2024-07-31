@@ -22,12 +22,7 @@
             <template v-for="event in events">
                 <div target="_blank" :to="event.url" class="event" v-if="activeDate === 0 || new Date(event.datetime).getDate() === activeDate">
                     <div class="event-content">
-                        <div class="event-image" :style="imageSrc(event)">
-                            <!-- <div class="event-image-bottom">
-                                <p class="event-date">{{ new Date(event.datetime).toLocaleDateString('da-DK', { month: 'long', day: 'numeric'}) }}</p>
-                                <p class="event-time">{{ new Date(event.datetime).toLocaleTimeString('da-DK', { hour: '2-digit', minute: '2-digit' }) }}</p>
-                            </div> -->
-                        </div>
+                        <div class="event-image" :style="imageSrc(event)"></div>
                     </div>
                     <div class="event-datetime">
                         <p class="event-date">{{ new Date(event.datetime).toLocaleDateString('da-DK', { month: 'long', day: 'numeric'}) }}</p>
@@ -137,30 +132,6 @@ useHead({
 }
 
 .feature {
-    // .theme-trans & {
-    //     background: $transGradientColorOne;
-    //     background: $transGradientTwo;
-    //     opacity: 1;
-    // }
-
-    // .theme-bipoc & {
-    //     background: $bipocGradientColorOne;
-    //     background: $bipocGradientTwo;
-    //     opacity: 1;
-    // }
-
-    // .theme-pal & {
-    //     background: $palGradientColorOne;
-    //     background: $palGradientTwo;
-    //     opacity: 1;
-    // }
-
-    // .theme-lez & {
-    //     background: $lezGradientColorOne;
-    //     background: $lezGradientTwo;
-    //     opacity: 1;
-    // }
-
     .theme-ready & {
         background: var(--theme-color-one);
         background: var(--theme-gradient-two);
@@ -226,25 +197,6 @@ useHead({
     }
 
     > a {
-        // .theme-trans & {
-        //     background: $transGradientColorOne;
-        //     background: $transGradientTwo;
-        // }
-
-        // .theme-bipoc & {
-        //     background: $bipocGradientColorOne;
-        //     background: $bipocGradientTwo;
-        // }
-
-        // .theme-pal & {
-        //     background: $palGradientColorOne;
-        //     background: $palGradientTwo;
-        // }
-
-        // .theme-lez & {
-        //     background: $lezGradientColorOne;
-        //     background: $lezGradientTwo;
-        // }
 
         .theme-ready & {
             background: var(--theme-color-one);
@@ -268,7 +220,7 @@ useHead({
 
     @include screenSizes(desktop) {
         justify-content: center;
-        flex-flow: nowrap;
+        flex-flow: wrap;
         width: 100%;
     }
 
@@ -286,7 +238,7 @@ useHead({
         width: $base * 8;
         
         @include screenSizes(desktop) {
-            margin: 0 $base;
+            margin: 0 $base $base;
             height: $base * 8;
             width: $base * 8;
         }
@@ -296,26 +248,6 @@ useHead({
         }
 
         &.active {
-            // .theme-trans & {
-            //     background: $transGradientColorOne;
-            //     background: $transGradientThree;
-            // }
-
-            // .theme-bipoc & {
-            //     background: $bipocGradientColorOne;
-            //     background: $bipocGradientThree;
-            // }
-
-            // .theme-pal & {
-            //     background: $palGradientColorOne;
-            //     background: $palGradientThree;
-            // }
-
-            // .theme-lez & {
-            //     background: $lezGradientColorOne;
-            //     background: $lezGradientThree;
-            // }
-
             .theme-ready & {
                 background: var(--theme-color-one);
                 background: var(--theme-gradient-three);
@@ -370,29 +302,7 @@ useHead({
 
     &:after {
         background: linear-gradient(to top, #000 0%, rgba(0, 0, 0, 0) 80%);
-        // .theme-trans & {
-        //     background: $transGradientOne;
-        //     background-size: 100%;
-        //     opacity: 0.5;
-        // }
-
-        // .theme-bipoc & {
-        //     background: $bipocGradientOne;
-        //     background-size: 100%;
-        //     opacity: 0.5;
-        // }
-
-        // .theme-pal & {
-        //     background: $palGradientOne;
-        //     background-size: 100%;
-        //     opacity: 0.5;
-        // }
-
-        // .theme-lez & {
-        //     background: $lezGradientOne;
-        //     background-size: 100%;
-        //     opacity: 0.5;
-        // }
+        mix-blend-mode: hard-light;
 
         .theme-ready & {
             background: var(--theme-gradient-one);
@@ -426,15 +336,13 @@ useHead({
 
 .datetime-splitter {
     font-size: $base * 2.5;
-    margin-bottom: $base;
+    margin: 0 $base;
 }
 
 .event-date, .event-time {
-    // color: $white;
     color: $black;
     font-family: 'FIRSTGAYAMERICANS';
     font-size: $base * 2.5;
-    // margin: $base $base 0 0;
     z-index: 10;
 }
 
@@ -444,6 +352,10 @@ useHead({
 
 .event-time {
     padding-right: $base;
+}
+
+.event-time, .event-date, .datetime-splitter {
+    margin-top: $base * 2.5;
 }
 
 .event-time, .event-date, .event-venue, .datetime-splitter {
@@ -456,7 +368,6 @@ useHead({
 }
 
 .event-title {
-    // border-top: 1px solid $black;
     font-family: 'Proxima Nova', sans-serif;
     font-size: $base * 3;
     font-weight: bold;
@@ -514,38 +425,6 @@ useHead({
 }
 
 .event-link {
-    // .theme-trans & {
-    //     background: $transGradientColorOne;
-    //     background: $transGradientThree;
-    //     border-color: $transGradientColorOne;
-    //     background-size: 100%;
-    //     transition: all 300ms ease-in-out;
-    // }
-
-    // .theme-bipoc & {
-    //     background: $bipocGradientColorOne;
-    //     background: $bipocGradientThree;
-    //     border-color: $bipocGradientColorOne;
-    //     background-size: 100%;
-    //     transition: all 300ms ease-in-out;
-    // }
-
-    // .theme-pal & {
-    //     background: $palGradientColorOne;
-    //     background: $palGradientThree;
-    //     border-color: $palGradientColorOne;
-    //     background-size: 100%;
-    //     transition: all 300ms ease-in-out;
-    // }
-
-    // .theme-lez & {
-    //     background: $lezGradientColorOne;
-    //     background: $lezGradientThree;
-    //     border-color: $lezGradientColorOne;
-    //     background-size: 100%;
-    //     transition: all 300ms ease-in-out;
-    // }
-
     .theme-ready & {
         background: var(--theme-color-one);
         background: var(--theme-gradient-three);
@@ -607,30 +486,6 @@ useHead({
 }
 
 .form-link {
-    // .theme-trans & {
-    //     background: $transGradientColorOne;
-    //     background: $transGradientFour;
-    //     opacity: 1;
-    // }
-
-    // .theme-bipoc & {
-    //     background: $bipocGradientColorOne;
-    //     background: $bipocGradientFour;
-    //     opacity: 1;
-    // }
-
-    // .theme-pal & {
-    //     background: $palGradientColorOne;
-    //     background: $palGradientFour;
-    //     opacity: 1;
-    // }
-
-    // .theme-lez & {
-    //     background: $lezGradientColorOne;
-    //     background: $lezGradientFour;
-    //     opacity: 1;
-    // }
-
     .theme-ready & {
         background: var(--theme-color-one);
         background: var(--theme-gradient-four);
@@ -652,30 +507,6 @@ useHead({
 }
 
 footer {
-    // .theme-trans & {
-    //     background: $transGradientColorOne;
-    //     background: $transGradientTwo;
-    //     opacity: 1;
-    // }
-
-    // .theme-bipoc & {
-    //     background: $bipocGradientColorOne;
-    //     background: $bipocGradientTwo;
-    //     opacity: 1;
-    // }
-
-    // .theme-pal & {
-    //     background: $palGradientColorOne;
-    //     background: $palGradientTwo;
-    //     opacity: 1;
-    // }
-
-    // .theme-lez & {
-    //     background: $lezGradientColorOne;
-    //     background: $lezGradientTwo;
-    //     opacity: 1;
-    // }
-
     .theme-ready & {
         background: var(--theme-color-one);
         background: var(--theme-gradient-two);
