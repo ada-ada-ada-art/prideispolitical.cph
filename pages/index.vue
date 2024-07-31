@@ -23,11 +23,16 @@
                 <div target="_blank" :to="event.url" class="event" v-if="activeDate === 0 || new Date(event.datetime).getDate() === activeDate">
                     <div class="event-content">
                         <div class="event-image" :style="imageSrc(event)">
-                            <div class="event-image-bottom">
+                            <!-- <div class="event-image-bottom">
                                 <p class="event-date">{{ new Date(event.datetime).toLocaleDateString('da-DK', { month: 'long', day: 'numeric'}) }}</p>
                                 <p class="event-time">{{ new Date(event.datetime).toLocaleTimeString('da-DK', { hour: '2-digit', minute: '2-digit' }) }}</p>
-                            </div>
+                            </div> -->
                         </div>
+                    </div>
+                    <div class="event-datetime">
+                        <p class="event-date">{{ new Date(event.datetime).toLocaleDateString('da-DK', { month: 'long', day: 'numeric'}) }}</p>
+                        <span class="datetime-splitter">-</span>
+                        <p class="event-time">{{ new Date(event.datetime).toLocaleTimeString('da-DK', { hour: '2-digit', minute: '2-digit' }) }}</p>
                     </div>
                     <h4 class="event-title">{{ event.title }}</h4>
                     <p class="event-venue">{{ event.venue }}</p>
@@ -132,27 +137,33 @@ useHead({
 }
 
 .feature {
-    .theme-trans & {
-        background: $transGradientColorOne;
-        background: $transGradientTwo;
-        opacity: 1;
-    }
+    // .theme-trans & {
+    //     background: $transGradientColorOne;
+    //     background: $transGradientTwo;
+    //     opacity: 1;
+    // }
 
-    .theme-bipoc & {
-        background: $bipocGradientColorOne;
-        background: $bipocGradientTwo;
-        opacity: 1;
-    }
+    // .theme-bipoc & {
+    //     background: $bipocGradientColorOne;
+    //     background: $bipocGradientTwo;
+    //     opacity: 1;
+    // }
 
-    .theme-pal & {
-        background: $palGradientColorOne;
-        background: $palGradientTwo;
-        opacity: 1;
-    }
+    // .theme-pal & {
+    //     background: $palGradientColorOne;
+    //     background: $palGradientTwo;
+    //     opacity: 1;
+    // }
 
-    .theme-lez & {
-        background: $lezGradientColorOne;
-        background: $lezGradientTwo;
+    // .theme-lez & {
+    //     background: $lezGradientColorOne;
+    //     background: $lezGradientTwo;
+    //     opacity: 1;
+    // }
+
+    .theme-ready & {
+        background: var(--theme-color-one);
+        background: var(--theme-gradient-two);
         opacity: 1;
     }
 
@@ -215,24 +226,29 @@ useHead({
     }
 
     > a {
-        .theme-trans & {
-            background: $transGradientColorOne;
-            background: $transGradientTwo;
-        }
+        // .theme-trans & {
+        //     background: $transGradientColorOne;
+        //     background: $transGradientTwo;
+        // }
 
-        .theme-bipoc & {
-            background: $bipocGradientColorOne;
-            background: $bipocGradientTwo;
-        }
+        // .theme-bipoc & {
+        //     background: $bipocGradientColorOne;
+        //     background: $bipocGradientTwo;
+        // }
 
-        .theme-pal & {
-            background: $palGradientColorOne;
-            background: $palGradientTwo;
-        }
+        // .theme-pal & {
+        //     background: $palGradientColorOne;
+        //     background: $palGradientTwo;
+        // }
 
-        .theme-lez & {
-            background: $lezGradientColorOne;
-            background: $lezGradientTwo;
+        // .theme-lez & {
+        //     background: $lezGradientColorOne;
+        //     background: $lezGradientTwo;
+        // }
+
+        .theme-ready & {
+            background: var(--theme-color-one);
+            background: var(--theme-gradient-two);
         }
 
         color: $white;
@@ -280,24 +296,29 @@ useHead({
         }
 
         &.active {
-            .theme-trans & {
-                background: $transGradientColorOne;
-                background: $transGradientThree;
-            }
+            // .theme-trans & {
+            //     background: $transGradientColorOne;
+            //     background: $transGradientThree;
+            // }
 
-            .theme-bipoc & {
-                background: $bipocGradientColorOne;
-                background: $bipocGradientThree;
-            }
+            // .theme-bipoc & {
+            //     background: $bipocGradientColorOne;
+            //     background: $bipocGradientThree;
+            // }
 
-            .theme-pal & {
-                background: $palGradientColorOne;
-                background: $palGradientThree;
-            }
+            // .theme-pal & {
+            //     background: $palGradientColorOne;
+            //     background: $palGradientThree;
+            // }
 
-            .theme-lez & {
-                background: $lezGradientColorOne;
-                background: $lezGradientThree;
+            // .theme-lez & {
+            //     background: $lezGradientColorOne;
+            //     background: $lezGradientThree;
+            // }
+
+            .theme-ready & {
+                background: var(--theme-color-one);
+                background: var(--theme-gradient-three);
             }
 
             border: none;
@@ -348,27 +369,33 @@ useHead({
     width: 100%;
 
     &:after {
-        // background: linear-gradient(to top, #000 0%, rgba(0, 0, 0, 0) 80%);
-        .theme-trans & {
-            background: $transGradientOne;
-            background-size: 100%;
-            opacity: 0.5;
-        }
+        background: linear-gradient(to top, #000 0%, rgba(0, 0, 0, 0) 80%);
+        // .theme-trans & {
+        //     background: $transGradientOne;
+        //     background-size: 100%;
+        //     opacity: 0.5;
+        // }
 
-        .theme-bipoc & {
-            background: $bipocGradientOne;
-            background-size: 100%;
-            opacity: 0.5;
-        }
+        // .theme-bipoc & {
+        //     background: $bipocGradientOne;
+        //     background-size: 100%;
+        //     opacity: 0.5;
+        // }
 
-        .theme-pal & {
-            background: $palGradientOne;
-            background-size: 100%;
-            opacity: 0.5;
-        }
+        // .theme-pal & {
+        //     background: $palGradientOne;
+        //     background-size: 100%;
+        //     opacity: 0.5;
+        // }
 
-        .theme-lez & {
-            background: $lezGradientOne;
+        // .theme-lez & {
+        //     background: $lezGradientOne;
+        //     background-size: 100%;
+        //     opacity: 0.5;
+        // }
+
+        .theme-ready & {
+            background: var(--theme-gradient-one);
             background-size: 100%;
             opacity: 0.5;
         }
@@ -386,15 +413,28 @@ useHead({
 
 .event-image-bottom {
     align-items: flex-end;
+    color: $black;
     display: flex;
     justify-content: space-between;
 }
 
+.event-datetime {
+    border-top: 1px solid $black;
+    display: flex;
+    justify-content: center;
+}
+
+.datetime-splitter {
+    font-size: $base * 2.5;
+    margin-bottom: $base;
+}
+
 .event-date, .event-time {
-    color: $white;
+    // color: $white;
+    color: $black;
     font-family: 'FIRSTGAYAMERICANS';
     font-size: $base * 2.5;
-    margin-top: $base;
+    // margin: $base $base 0 0;
     z-index: 10;
 }
 
@@ -406,7 +446,7 @@ useHead({
     padding-right: $base;
 }
 
-.event-time, .event-date, .event-venue {
+.event-time, .event-date, .event-venue, .datetime-splitter {
     align-items: center;
     display: flex;
     flex-direction: column;
@@ -416,7 +456,7 @@ useHead({
 }
 
 .event-title {
-    border-top: 1px solid $black;
+    // border-top: 1px solid $black;
     font-family: 'Proxima Nova', sans-serif;
     font-size: $base * 3;
     font-weight: bold;
@@ -474,34 +514,42 @@ useHead({
 }
 
 .event-link {
-    .theme-trans & {
-        background: $transGradientColorOne;
-        background: $transGradientThree;
-        border-color: $transGradientColorOne;
-        background-size: 100%;
-        transition: all 300ms ease-in-out;
-    }
+    // .theme-trans & {
+    //     background: $transGradientColorOne;
+    //     background: $transGradientThree;
+    //     border-color: $transGradientColorOne;
+    //     background-size: 100%;
+    //     transition: all 300ms ease-in-out;
+    // }
 
-    .theme-bipoc & {
-        background: $bipocGradientColorOne;
-        background: $bipocGradientThree;
-        border-color: $bipocGradientColorOne;
-        background-size: 100%;
-        transition: all 300ms ease-in-out;
-    }
+    // .theme-bipoc & {
+    //     background: $bipocGradientColorOne;
+    //     background: $bipocGradientThree;
+    //     border-color: $bipocGradientColorOne;
+    //     background-size: 100%;
+    //     transition: all 300ms ease-in-out;
+    // }
 
-    .theme-pal & {
-        background: $palGradientColorOne;
-        background: $palGradientThree;
-        border-color: $palGradientColorOne;
-        background-size: 100%;
-        transition: all 300ms ease-in-out;
-    }
+    // .theme-pal & {
+    //     background: $palGradientColorOne;
+    //     background: $palGradientThree;
+    //     border-color: $palGradientColorOne;
+    //     background-size: 100%;
+    //     transition: all 300ms ease-in-out;
+    // }
 
-    .theme-lez & {
-        background: $lezGradientColorOne;
-        background: $lezGradientThree;
-        border-color: $lezGradientColorOne;
+    // .theme-lez & {
+    //     background: $lezGradientColorOne;
+    //     background: $lezGradientThree;
+    //     border-color: $lezGradientColorOne;
+    //     background-size: 100%;
+    //     transition: all 300ms ease-in-out;
+    // }
+
+    .theme-ready & {
+        background: var(--theme-color-one);
+        background: var(--theme-gradient-three);
+        border-color: var(--theme-color-one);
         background-size: 100%;
         transition: all 300ms ease-in-out;
     }
@@ -559,27 +607,33 @@ useHead({
 }
 
 .form-link {
-    .theme-trans & {
-        background: $transGradientColorOne;
-        background: $transGradientFour;
-        opacity: 1;
-    }
+    // .theme-trans & {
+    //     background: $transGradientColorOne;
+    //     background: $transGradientFour;
+    //     opacity: 1;
+    // }
 
-    .theme-bipoc & {
-        background: $bipocGradientColorOne;
-        background: $bipocGradientFour;
-        opacity: 1;
-    }
+    // .theme-bipoc & {
+    //     background: $bipocGradientColorOne;
+    //     background: $bipocGradientFour;
+    //     opacity: 1;
+    // }
 
-    .theme-pal & {
-        background: $palGradientColorOne;
-        background: $palGradientFour;
-        opacity: 1;
-    }
+    // .theme-pal & {
+    //     background: $palGradientColorOne;
+    //     background: $palGradientFour;
+    //     opacity: 1;
+    // }
 
-    .theme-lez & {
-        background: $lezGradientColorOne;
-        background: $lezGradientFour;
+    // .theme-lez & {
+    //     background: $lezGradientColorOne;
+    //     background: $lezGradientFour;
+    //     opacity: 1;
+    // }
+
+    .theme-ready & {
+        background: var(--theme-color-one);
+        background: var(--theme-gradient-four);
         opacity: 1;
     }
 
@@ -598,27 +652,33 @@ useHead({
 }
 
 footer {
-    .theme-trans & {
-        background: $transGradientColorOne;
-        background: $transGradientTwo;
-        opacity: 1;
-    }
+    // .theme-trans & {
+    //     background: $transGradientColorOne;
+    //     background: $transGradientTwo;
+    //     opacity: 1;
+    // }
 
-    .theme-bipoc & {
-        background: $bipocGradientColorOne;
-        background: $bipocGradientTwo;
-        opacity: 1;
-    }
+    // .theme-bipoc & {
+    //     background: $bipocGradientColorOne;
+    //     background: $bipocGradientTwo;
+    //     opacity: 1;
+    // }
 
-    .theme-pal & {
-        background: $palGradientColorOne;
-        background: $palGradientTwo;
-        opacity: 1;
-    }
+    // .theme-pal & {
+    //     background: $palGradientColorOne;
+    //     background: $palGradientTwo;
+    //     opacity: 1;
+    // }
 
-    .theme-lez & {
-        background: $lezGradientColorOne;
-        background: $lezGradientTwo;
+    // .theme-lez & {
+    //     background: $lezGradientColorOne;
+    //     background: $lezGradientTwo;
+    //     opacity: 1;
+    // }
+
+    .theme-ready & {
+        background: var(--theme-color-one);
+        background: var(--theme-gradient-two);
         opacity: 1;
     }
 

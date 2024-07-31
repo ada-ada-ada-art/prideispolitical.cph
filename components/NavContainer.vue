@@ -2,7 +2,7 @@
     <nav>
         <NuxtLink to="/">
             <h1>Pride is political</h1>
-            <h2>Copenhagen · 10-18 Aug 2024</h2>
+            <h2>Copenhagen · August 2024</h2>
         </NuxtLink>
 
         <div class="link-container">
@@ -14,27 +14,9 @@
 
 <style scoped lang="scss">
 nav {
-    .theme-trans & {
-        background: $transGradientColorOne;
-        background: $transGradientOne;
-        opacity: 1;
-    }
-
-    .theme-bipoc & {
-        background: $bipocGradientColorOne;
-        background: $bipocGradientOne;
-        opacity: 1;
-    }
-
-    .theme-pal & {
-        background: $palGradientColorOne;
-        background: $palGradientOne;
-        opacity: 1;
-    }
-
-    .theme-lez & {
-        background: $lezGradientColorOne;
-        background: $lezGradientOne;
+    .theme-ready & {
+        background: var(--theme-color-one);
+        background: var(--theme-gradient-one);
         opacity: 1;
     }
 
