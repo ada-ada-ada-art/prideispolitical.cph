@@ -15,9 +15,9 @@
     <div class="calendar">
         <h3>Calendar</h3>
         <p class="event-count">{{ eventCount }} event{{ eventCount === 1 ? '' : 's' }} registrered so far</p>
-        <!-- <div class="date-buttons">
+        <div class="date-buttons">
             <button v-for="date in dates" :class="activeDate === date ? 'active' : ''" @click="activeDate = date" v-html="date > 0 ? date + '.<br>AUG' : 'All days' "></button>
-        </div> -->
+        </div>
         <div class="events-container">
             <template v-for="event in events">
                 <div target="_blank" :to="event.url" class="event" v-if="activeDate === 0 || new Date(event.datetime).getDate() === activeDate">
@@ -53,13 +53,20 @@
 
 <script setup lang="ts">
 let activeDate = ref(0)
-let dates = [0, 10, 11, 12, 13, 14, 15, 16, 17, 18]
+let dates = [0]
 
 let isDev = process.dev
 isDev = false
 let eventFolder = isDev ? 'dev-events' : 'events'
 const { data: events } = await useAsyncData(eventFolder, () => queryContent('/' + eventFolder).sort({datetime: 1}).find())
 let eventCount = events.value.length
+events.value.forEach((e, i) => {
+    let d = new Date(e.datetime)
+    let day = d.getDate()
+    if (!dates.includes(day)) {
+        dates.push(day)
+    }
+})
 
 const img = useImage()
 
@@ -244,7 +251,7 @@ useHead({
     width: 90vw;
 
     @include screenSizes(desktop) {
-        justify-content: space-between;
+        justify-content: center;
         flex-flow: nowrap;
         width: 100%;
     }
@@ -258,12 +265,12 @@ useHead({
         cursor: pointer;
         font-size: $base * 2;
         height: $base * 8;
-        margin-bottom: $base;
+        margin: 0 $base $base;
         text-transform: uppercase;
         width: $base * 8;
         
         @include screenSizes(desktop) {
-            margin-bottom: 0;
+            margin: 0 $base;
             height: $base * 8;
             width: $base * 8;
         }
@@ -448,6 +455,15 @@ useHead({
         position: absolute;
         width: 50%;
     }
+}
+
+.link-title {
+    align-self: center;
+    font-family: "Proxima Nova", sans-serif;
+    font-size: $base * 1.5;
+    font-weight: bold;
+    margin: 2 * $base 0;
+    text-transform: uppercase;
 }
 
 .event-link-container {
