@@ -14,7 +14,8 @@
     </div>
     <div class="calendar">
         <h3>Calendar</h3>
-        <p class="event-count">{{ eventCount }} event{{ eventCount === 1 ? '' : 's' }} registrered so far</p>
+        <p class="event-count" v-if="activeDate === 0">{{ eventCount }} event{{ eventCount === 1 ? '' : 's' }} in total</p>
+        <p class="event-count" v-else>{{ eventCount }} event{{ eventCount === 1 ? '' : 's' }} on {{ activeDate }}. August</p>
         <div class="date-buttons">
             <button v-for="date in dates" :class="activeDate === date ? 'active' : ''" @click="activeDate = date" v-html="date > 0 ? date + '.<br>AUG' : 'All days' "></button>
         </div>
@@ -59,7 +60,17 @@ let isDev = process.dev
 isDev = false
 let eventFolder = isDev ? 'dev-events' : 'events'
 const { data: events } = await useAsyncData(eventFolder, () => queryContent('/' + eventFolder).sort({datetime: 1}).find())
-let eventCount = events.value.length
+let eventCount = computed(() => {
+    return events.value.reduce((acc, cur) => {
+        let d = new Date(cur.datetime)
+        let day = d.getDate()
+        if (day === activeDate.value || activeDate.value === 0) {
+            return acc + 1
+        } else {
+            return acc
+        }
+    }, 0)
+})
 events.value.forEach((e, i) => {
     let d = new Date(e.datetime)
     let day = d.getDate()
