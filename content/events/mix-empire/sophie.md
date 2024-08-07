@@ -1,5 +1,5 @@
 ---
-title: Pitchblack Playback · Sophie – Oil and every pearl's un-insides
+title: "Pitchblack Playback: \n Sophie - Oil of every pearl's un-insides"
 datetime: 2024-08-13T19:30:00+02:00
 organisers: MIX CPH & Empire Bio
 venue: Empire Bio
