@@ -5,5 +5,5 @@ organisers: MIX CPH & Empire Bio
 venue: Empire Bio
 img_url: mix-empire/sophie.jpg
 main_url: https://billet.empirebio.dk/billetter/33543/369795?org=141
-secondary_url: https://instagram.com/p/C-QURxcIO4H/
+secondary_url: https://instagram.com/p/C-QUbdOo5gb/
 ---
