@@ -1,6 +1,7 @@
 <template>
     <div class="explainer">
         <h3>Pride is Political is a decentralized festival of autonomous pride events in CPH. <br>You host, we share it with the community. We believe in queer liberation, solidarity and human rights.</h3>
+        <a @click="scrollToCalendar()" class="calendar-link">Go to calendar</a>
     </div>
     <div class="feature">
         <div class="feature-text">
@@ -13,7 +14,7 @@
         </div>
     </div>
     <div class="calendar">
-        <h3>Calendar</h3>
+        <h3 ref="calendar">Calendar</h3>
         <p class="event-count" v-if="activeDate === 0">{{ eventCount }} event{{ eventCount === 1 ? '' : 's' }} in total</p>
         <p class="event-count" v-else>{{ eventCount }} event{{ eventCount === 1 ? '' : 's' }} on {{ activeDate }}. August</p>
         <div class="date-buttons">
@@ -91,6 +92,17 @@ function getDomainName(link:string) {
     return url.hostname
 }
 
+const calendar = ref(null)
+function scrollToCalendar() {
+    if (process.client && calendar.value) {
+        window.scrollTo({
+            top: calendar.value.offsetTop, 
+            left: 0, 
+            behavior: 'smooth'
+        });
+    }
+}
+
 let desc = 'Pride is Political is a decentralized festival of autonomous, alternative pride events in Copenhagen. We believe in queer liberation, solidarity and human rights.'
 useSeoMeta({
     ogTitle: 'Pride is Political — A decentralized festival of autonomous, alternative pride events in Copenhagen',
@@ -117,14 +129,14 @@ useHead({
     color: $white;
     display: flex;
     flex-direction: column;
-    margin: $base * 2 0;
-    padding: $base * 6 0;
+    margin: $base * 2 0 0;
+    padding: $base * 6 0 $base * 4;
     text-align: center;
     width: 100%;
 
     @include screenSizes(desktop) {
         font-size: $base * 6;
-        margin: $base * 4 0;
+        margin: $base * 4 0 0;
     }
     
     h3 {
@@ -139,6 +151,25 @@ useHead({
             font-size: $base * 6;
             max-width: $baseMaxWidth;
         }
+    }
+}
+
+.calendar-link {
+    &:hover {
+        border-style: dotted;
+    }
+
+    border: 2px solid $black;
+    color: $black;
+    cursor: pointer;
+    font-size: $base * 3;
+    margin-top: $base * 4;
+    padding: $base $base * 2;
+    text-decoration: none;
+    text-transform: uppercase;
+
+    @include screenSizes(desktop) {
+        font-size: $base * 4;
     }
 }
 
