@@ -15,14 +15,19 @@
     </div>
     <div class="calendar">
         <h3 ref="calendar">Calendar</h3>
-        <p class="event-count" v-if="activeDate === 0">{{ eventCount }} event{{ eventCount === 1 ? '' : 's' }} in total</p>
-        <p class="event-count" v-else>{{ eventCount }} event{{ eventCount === 1 ? '' : 's' }} on {{ activeDate }}. August</p>
-        <div class="date-buttons">
-            <button v-for="date in dates" :class="activeDate === date ? 'active' : ''" @click="activeDate = date" v-html="date > 0 ? date + '.<br>AUG' : 'All days' "></button>
+        <div class="year-buttons">
+            <button v-for="f in festivals" :class="activeYear === f.year ? 'active' : ''" @click="activeYear = f.year; activeDate = 0">{{ f.year }}</button>
+        </div>
+        <p class="event-count" v-if="activeDate === 0">{{ eventCount }} event{{ eventCount === 1 ? '' : 's' }} in {{ activeYear }}</p>
+        <p class="event-count" v-else>{{ eventCount }} event{{ eventCount === 1 ? '' : 's' }} on {{ activeDate }}. August {{ activeYear }}</p>
+        <div class="date-buttons" v-if="eventCount > 0">
+            <template v-for="f in festivals">
+                <button v-if="f.year === activeYear" v-for="date in f.dates" :class="activeDate === date ? 'active' : ''" @click="activeDate = date" v-html="date > 0 ? date + '.<br>AUG' : 'All days' "></button>
+            </template>
         </div>
         <div class="events-container">
             <template v-for="event in events">
-                <div target="_blank" :to="event.url" class="event" v-if="activeDate === 0 || new Date(event.datetime).getDate() === activeDate">
+                <div target="_blank" :to="event.url" class="event" v-if="shouldShowEvent(event)">
                     <div class="event-content">
                         <div class="event-image" :style="imageSrc(event)"></div>
                     </div>
@@ -43,10 +48,13 @@
         </div>
     </div>
     <div class="submission" id="submission">
-        <h3>Submit your event</h3>
-        <p>To get your event onto the Pride is Political calendar, we ask you to fill out a brief form with some basic information about your event.</p>
-        <NuxtLink class="form-link" to="https://forms.zohopublic.eu/prideispoliticalcph/form/PRIDEISPOLITICAL2024/formperma/abHwwjwNIOTzTcV3VWHu9od-8viYKQZeJs4PLaYIe9s" target="_blank">Click here to find our event submission form</NuxtLink>
-        <p class="questions">If you have any questions about the form, <br><NuxtLink to="/about">click here to find our contact information</NuxtLink>.</p>
+        <h3>Send us your event</h3>
+        <p>To get your event onto the Pride is Political calendar, send us the following information about your event via email or Instagram:</p>
+        <p>Event title, time and date, location, name of organizer group, one or two links to the event (we recommend using <NuxtLink to="https://dukop.dk/" target="_blank">Duk Op</NuxtLink>) and an event image.</p>
+        <p>
+            Instagram - <NuxtLink to="https://instagram.com/prideispolitical.cph">@prideispolitical.cph</NuxtLink><br/>
+            Email - <NuxtLink to="mailto:prideispolitical.cph@proton.me">prideispolitical.cph@proton.me</NuxtLink>
+        </p>
     </div>
     <footer>
         <p>Pride is Political is a project by <NuxtLink target="_blank" to="https://ada-ada-ada.art">Ada Ada Ada</NuxtLink> and friends.</p>
@@ -54,8 +62,14 @@
 </template>
 
 <script setup lang="ts">
+type Festival = {year:number, events:[], dates:number[]}
 let activeDate = ref(0)
-let dates = [0]
+let activeYear = ref(2025)
+let festivals:Festival[] = [{
+    year: 2025,
+    events: [],
+    dates: [0]
+}]
 
 let isDev = process.dev
 isDev = false
@@ -63,25 +77,47 @@ let eventFolder = isDev ? 'dev-events' : 'events'
 const { data: events } = await useAsyncData(eventFolder, () => queryContent('/' + eventFolder).sort({datetime: 1}).find())
 let eventCount = computed(() => {
     return events.value.reduce((acc, cur) => {
-        let d = new Date(cur.datetime)
-        let day = d.getDate()
-        if (day === activeDate.value || activeDate.value === 0) {
+        let shouldBeCounted = shouldShowEvent(cur)
+        if (shouldBeCounted) {
             return acc + 1
         } else {
             return acc
         }
     }, 0)
 })
+
+// Put together Festival arrays so we can filter probably
 events.value.forEach((e, i) => {
     let d = new Date(e.datetime)
-    let day = d.getDate()
-    if (!dates.includes(day)) {
-        dates.push(day)
+    let eventYear = d.getFullYear()
+    let eventDay = d.getDate()
+    let wasYearAdded = festivals.some((f) => {
+        if (f.year === eventYear) {
+            return true
+        }
+    })
+    if (!wasYearAdded) {
+        festivals.push({
+            year: eventYear,
+            events: [],
+            dates: [0]
+        })
     }
+    festivals.forEach((f) => {
+        if (f.year === eventYear) {
+            f.events.push(e)
+            if (!f.dates.includes(eventDay)) {
+                f.dates.push(eventDay)
+            }
+        }
+    })
+})
+// Sort festivals by latest year
+festivals.sort((a, b) => {
+    return a.year > b.year ? -1 : 1
 })
 
 const img = useImage()
-
 function imageSrc(event) {
     const imgUrl = img('img/events/' + event.img_url, { width: 600, grayscale: true })
     return { backgroundImage: `url('${imgUrl}')` }
@@ -90,6 +126,13 @@ function imageSrc(event) {
 function getDomainName(link:string) {
     let url = new URL(link)
     return url.hostname
+}
+
+function shouldShowEvent(event) {
+    let eventDate = new Date(event.datetime)
+    let isCorrectDate = activeDate.value === 0 || eventDate.getDate() === activeDate.value
+    let isCorrectYear = activeYear.value === 0 || eventDate.getFullYear() === activeYear.value
+    return isCorrectDate && isCorrectYear
 }
 
 const calendar = ref(null)
@@ -254,7 +297,7 @@ useHead({
     }
 }
 
-.date-buttons {
+.date-buttons, .year-buttons {
     display: flex;
     justify-content: space-evenly;
     flex-flow: wrap;
@@ -298,6 +341,14 @@ useHead({
             border: none;
             color: $white;
         }
+    }
+}
+
+.year-buttons {
+    margin-top: $base * 2;
+
+    button {
+        height: auto;
     }
 }
 
@@ -513,9 +564,9 @@ useHead({
     }
 
     a {
-        color: $white;
+        color: $black;
         font-family: 'FIRSTGAYAMERICANS', sans-serif;
-        font-size: $base * 3;
+        // font-size: $base * 3;
         text-transform: uppercase;
     }
 

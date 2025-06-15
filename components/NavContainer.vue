@@ -2,7 +2,7 @@
     <nav>
         <NuxtLink to="/">
             <h1>Pride is political</h1>
-            <h2>Copenhagen · August 2024</h2>
+            <h2>Copenhagen · August 2025</h2>
         </NuxtLink>
 
         <div class="link-container">
