@@ -63,10 +63,11 @@
 
 <script setup lang="ts">
 type Festival = {year:number, events:[], dates:number[]}
+const startYear = 2025
 let activeDate = ref(0)
-let activeYear = ref(2025)
+let activeYear = ref(0)
 let festivals:Festival[] = [{
-    year: 2025,
+    year: startYear,
     events: [],
     dates: [0]
 }]
@@ -86,7 +87,7 @@ let eventCount = computed(() => {
     }, 0)
 })
 
-// Put together Festival arrays so we can filter probably
+// Put together Festival arrays so we can filter properly
 events.value.forEach((e, i) => {
     let d = new Date(e.datetime)
     let eventYear = d.getFullYear()
@@ -115,6 +116,10 @@ events.value.forEach((e, i) => {
 // Sort festivals by latest year
 festivals.sort((a, b) => {
     return a.year > b.year ? -1 : 1
+})
+
+onMounted(() => {
+  activeYear.value = startYear
 })
 
 const img = useImage()
