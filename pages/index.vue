@@ -18,7 +18,7 @@
         <div class="year-buttons">
             <button v-for="f in festivals" :class="activeYear === f.year ? 'active' : ''" @click="activeYear = f.year; activeDate = 0">{{ f.year }}</button>
         </div>
-        <p class="event-count" v-if="activeDate === 0">{{ eventCount }} event{{ eventCount === 1 ? '' : 's' }} in {{ activeYear }}</p>
+        <p class="event-count" v-if="activeDate === 0">{{ eventCount }} event{{ eventCount === 1 ? '' : 's' }} in {{ activeYear }} {{ activeYear === startYear ? 'so far.' : '' }}<div v-if="eventCount < 5">Follow instructions <a @click="scrollToInstructions()" class="instructions-link">below</a> to get your event on the calendar.</div></p>
         <p class="event-count" v-else>{{ eventCount }} event{{ eventCount === 1 ? '' : 's' }} on {{ activeDate }}. August {{ activeYear }}</p>
         <div class="date-buttons" v-if="eventCount > 0">
             <template v-for="f in festivals">
@@ -48,13 +48,30 @@
         </div>
     </div>
     <div class="submission" id="submission">
-        <h3>Send us your event</h3>
-        <p>To get your event onto the Pride is Political calendar, send us the following information about your event via email or Instagram:</p>
+        <h3 ref="instructions">Send us your event</h3>
+        <p>To get your event onto the Pride is Political calendar, send us the following information about your event via email (recommended) or Instagram:</p>
         <p>Event title, time and date, location, name of organizer group, one or two links to the event (we recommend using <NuxtLink to="https://dukop.dk/" target="_blank">Duk Op</NuxtLink>) and an event image.</p>
         <p>
             Instagram - <NuxtLink to="https://instagram.com/prideispolitical.cph">@prideispolitical.cph</NuxtLink><br/>
             Email - <NuxtLink to="mailto:prideispolitical.cph@proton.me">prideispolitical.cph@proton.me</NuxtLink>
         </p>
+    </div>
+    <div class="newsletter">
+        <h3>Stay updated</h3>
+        <p>Sign up to our newsletter or <NuxtLink to="https://pixelfed.social/prideispolitical.cph">find us on Pixelfed</NuxtLink> to get updates from Pride is Political outside of Meta platforms:</p>
+        <form
+        action="https://buttondown.com/api/emails/embed-subscribe/prideispolitical.cph"
+        method="post"
+        target="popupwindow"
+        onsubmit="window.open('https://buttondown.com/prideispolitical.cph', 'popupwindow')"
+        class="embeddable-buttondown-form"
+        >
+            <label for="bd-email">Enter your email address</label>
+            <div class="input-container">
+                <input type="email" required name="email" id="bd-email" placeholder="hello@example.com" />
+                <input type="submit" value="Sign up" />
+            </div>
+        </form>
     </div>
     <footer>
         <p>Pride is Political is a project by <NuxtLink target="_blank" to="https://ada-ada-ada.art">Ada Ada Ada</NuxtLink> and friends.</p>
@@ -145,6 +162,17 @@ function scrollToCalendar() {
     if (process.client && calendar.value) {
         window.scrollTo({
             top: calendar.value.offsetTop, 
+            left: 0, 
+            behavior: 'smooth'
+        });
+    }
+}
+
+const instructions = ref(null)
+function scrollToInstructions() {
+    if (process.client && instructions.value) {
+        window.scrollTo({
+            top: instructions.value.offsetTop, 
             left: 0, 
             behavior: 'smooth'
         });
@@ -259,7 +287,7 @@ useHead({
         }
 
         p {
-            font-family: "Proxima Nova", sans-serif;
+            font-family: 'Proxima Nova', sans-serif;
             font-size: $base * 2.5;
             max-width: $baseMaxMobileWidth;
 
@@ -283,7 +311,13 @@ useHead({
 
     .event-count {
         font-size: $base * 3;
+        text-align: center;
         text-transform: uppercase;
+
+        a {
+            cursor: pointer;
+            text-decoration: underline;
+        }
     }
 
     > a {
@@ -486,7 +520,7 @@ useHead({
 
 .event-venue {
     box-sizing: border-box;
-    font-family: "Proxima Nova", sans-serif;
+    font-family: 'Proxima Nova', sans-serif;
     // color: $white;
     font-size: $base * 2;
     margin: 0;
@@ -508,7 +542,7 @@ useHead({
 
 .link-title {
     align-self: center;
-    font-family: "Proxima Nova", sans-serif;
+    font-family: 'Proxima Nova', sans-serif;
     font-size: $base * 1.5;
     font-weight: bold;
     margin: 2 * $base 0;
@@ -553,7 +587,7 @@ useHead({
     margin-bottom: $base * 4;
 
     p {
-        font-family: "Proxima Nova", sans-serif;
+        font-family: 'Proxima Nova', sans-serif;
         font-size: $base * 2.5;
         text-align: center;
         max-width: $baseMaxMobileWidth;
@@ -577,30 +611,81 @@ useHead({
 
     .questions a {
         color: $black;
-        font-family: "Proxima Nova", sans-serif;
+        font-family: 'Proxima Nova', sans-serif;
         font-size: $base * 2.5;
         text-transform: none;
     }
 }
 
-.form-link {
-    .theme-ready & {
-        background: var(--theme-color-one);
-        background: var(--theme-gradient-four);
-        opacity: 1;
+.newsletter {
+    align-items: center;
+    display: flex;
+    flex-direction: column;
+    margin-bottom: $base * 4;
+    text-align: center;
+
+    p {
+        font-family: 'Proxima Nova', sans-serif;
+        font-size: $base * 2.5;
+        text-align: center;
+        max-width: $baseMaxMobileWidth;
+        
+        @include screenSizes(desktop) {
+            max-width: $base * 80;
+        }
     }
 
-    box-sizing: border-box;
-    color: $white;
-    opacity: 0;
-    padding: $base * 2;
-    text-align: center;
-    text-decoration: none;
-    transition: opacity 300ms ease-in-out;
-    max-width: $baseMaxMobileWidth;
-    
     a {
-        text-decoration: none;
+        color: $black;
+        font-family: 'Proxima Nova', sans-serif;
+        font-size: $base * 2.5;
+        text-transform: none;
+    }
+
+    h3 {
+        font-size: $base * 6;
+        text-transform: uppercase;
+    }
+
+    label {
+        font-size: $base * 3;
+        display: block;
+        margin-bottom: $base;
+        text-align: center;
+        text-transform: uppercase;
+    }
+
+    .input-container {
+        align-items: center;
+        display: flex;
+        justify-content: center;
+    }
+
+    input {
+        background: none;
+        border: 1px solid $black;
+        box-sizing: border-box;
+        font-size: $base * 2;
+        font-family: 'Proxima Nova', sans-serif;
+        min-height: $base * 5;
+    }
+
+    input[type='email'] {
+        margin-right: $base;
+        padding: 0 0 0 $base;
+        padding-left: $base;
+        width: $base * 30;
+    }
+
+    input[type='submit'] {
+        cursor: pointer;
+        font-family: 'FIRSTGAYAMERICANS', sans-serif;
+        padding: 0 $base * 2;
+        text-transform: uppercase;
+
+        &:hover {
+            border-style: dashed;
+        }
     }
 }
 

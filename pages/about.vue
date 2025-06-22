@@ -15,9 +15,10 @@
         <p>Our only requirement is that you share our values – and stay away from pinkwashing, commodification of our existence, and for-profit agendas.</p>
         <p>We are looking for informative talks, inspiring exhibitions, community hang-outs, political demonstrations, parties with intentions, and more!</p>
         <h2>Contact</h2>
-        <p>You can get in touch with us on Instagram or on email.</p>
-        <p>Instagram: <NuxtLink to="https://instagram.com/prideispolitical.cph">@prideispolitical.cph</NuxtLink></p>
+        <p>You can get in touch with us on email or on Instagram, and follow us on Pixelfed.</p>
         <p>Email: <NuxtLink to="mailto:prideispolitical.cph@proton.me">prideispolitical.cph@proton.me</NuxtLink></p>
+        <p>Instagram: <NuxtLink to="https://instagram.com/prideispolitical.cph">@prideispolitical.cph</NuxtLink></p>
+        <p>Pixelfed: <NuxtLink to="https://pixelfed.social/prideispolitical.cph">prideispolitical.cph@pixelfed.social</NuxtLink></p>
         <h2>Credits</h2>
         <p>Pride is Political is a project by <NuxtLink target="_blank" to="https://ada-ada-ada.art">Ada Ada Ada</NuxtLink> and friends.</p>
         <!-- <p>Graphic design consulting by <NuxtLink target="_blank" to="https://www.instagram.com/michaellaenger/">Michael Langer</NuxtLink>.</p> -->
