@@ -74,7 +74,7 @@
         </form>
     </div>
     <footer>
-        <p>Pride is Political is a project by <NuxtLink target="_blank" to="https://ada-ada-ada.art">Ada Ada Ada</NuxtLink> and friends.</p>
+        <p>Pride is Political is a project by <NuxtLink target="_blank" to="https://ada-ada-ada.art">Ada Ada Ada</NuxtLink>, Michael Länger and friends.</p>
     </footer>
 </template>
 
