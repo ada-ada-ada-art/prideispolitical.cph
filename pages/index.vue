@@ -218,7 +218,7 @@ useHead({
     h3 {
         color: black;
         font-weight: bold;
-        font-style: italic;
+        font-style: normal;
         font-size: $base * 3;
         max-width: $baseMaxMobileWidth;
         text-transform: uppercase;
@@ -310,7 +310,9 @@ useHead({
     }
 
     .event-count {
+        box-sizing: border-box;
         font-size: $base * 3;
+        padding: 0 $base * 2;
         text-align: center;
         text-transform: uppercase;
 
@@ -388,6 +390,7 @@ useHead({
 
     button {
         height: auto;
+        margin-bottom: 0;
     }
 }
 
@@ -664,6 +667,7 @@ useHead({
     input {
         background: none;
         border: 1px solid $black;
+        border-radius: 0;
         box-sizing: border-box;
         font-size: $base * 2;
         font-family: 'Proxima Nova', sans-serif;
@@ -679,6 +683,7 @@ useHead({
 
     input[type='submit'] {
         cursor: pointer;
+        color: $black;
         font-family: 'FIRSTGAYAMERICANS', sans-serif;
         padding: 0 $base * 2;
         text-transform: uppercase;
@@ -696,11 +701,12 @@ footer {
         opacity: 1;
     }
 
+    box-sizing: border-box;
     color: $white;
     display: flex;
     justify-content: center;
     opacity: 0;
-    padding: $base 0;
+    padding: $base $base * 2;
     text-transform: uppercase;
     text-align: center;
     transition: opacity 300ms ease-in-out;

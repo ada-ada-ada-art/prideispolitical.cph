@@ -90,38 +90,15 @@ export default {
     mounted () {
         this.colorScheme = themes[Math.floor(Math.random() * themes.length)]
 
-        window.CSS.registerProperty({
-            name: "--theme-color-one",
-            syntax: "<color>",
-            inherits: false,
-            initialValue: this.colorScheme.colorOne,
-        })
-        window.CSS.registerProperty({
-            name: "--theme-color-two",
-            syntax: "<color>",
-            inherits: false,
-            initialValue: this.colorScheme.colorTwo,
-        })
-        window.CSS.registerProperty({
-            name: "--theme-gradient-one",
-            inherits: false,
-            initialValue: `radial-gradient(circle at ${this.colorScheme.gradientOne[0]}% ${this.colorScheme.gradientOne[1]}%, ${this.colorScheme.colorOne} ${this.colorScheme.gradientOne[2]}%, ${this.colorScheme.colorTwo} ${this.colorScheme.gradientOne[3]}%)`,
-        })
-        window.CSS.registerProperty({
-            name: "--theme-gradient-two",
-            inherits: false,
-            initialValue: `radial-gradient(circle at ${this.colorScheme.gradientTwo[0]}% ${this.colorScheme.gradientTwo[1]}%, ${this.colorScheme.colorOne} ${this.colorScheme.gradientTwo[2]}%, ${this.colorScheme.colorTwo} ${this.colorScheme.gradientTwo[3]}%)`,
-        })
-        window.CSS.registerProperty({
-            name: "--theme-gradient-three",
-            inherits: false,
-            initialValue: `radial-gradient(circle at ${this.colorScheme.gradientThree[0]}% ${this.colorScheme.gradientThree[1]}%, ${this.colorScheme.colorOne} ${this.colorScheme.gradientThree[2]}%, ${this.colorScheme.colorTwo} ${this.colorScheme.gradientThree[3]}%)`,
-        })
-        window.CSS.registerProperty({
-            name: "--theme-gradient-four",
-            inherits: false,
-            initialValue: `radial-gradient(circle at ${this.colorScheme.gradientFour[0]}% ${this.colorScheme.gradientFour[1]}%, ${this.colorScheme.colorOne} ${this.colorScheme.gradientFour[2]}%, ${this.colorScheme.colorTwo} ${this.colorScheme.gradientFour[3]}%)`,
-        })
+        let rt = document.querySelector(':root')
+        console.log('Root', rt)
+
+        rt.style.setProperty('--theme-color-one', this.colorScheme.colorOne)
+        rt.style.setProperty('--theme-color-two', this.colorScheme.colorTwo)
+        rt.style.setProperty('--theme-gradient-one', `radial-gradient(circle at ${this.colorScheme.gradientOne[0]}% ${this.colorScheme.gradientOne[1]}%, ${this.colorScheme.colorOne} ${this.colorScheme.gradientOne[2]}%, ${this.colorScheme.colorTwo} ${this.colorScheme.gradientOne[3]}%)`)
+        rt.style.setProperty('--theme-gradient-two', `radial-gradient(circle at ${this.colorScheme.gradientTwo[0]}% ${this.colorScheme.gradientTwo[1]}%, ${this.colorScheme.colorOne} ${this.colorScheme.gradientTwo[2]}%, ${this.colorScheme.colorTwo} ${this.colorScheme.gradientTwo[3]}%)`)
+        rt.style.setProperty('--theme-gradient-three', `radial-gradient(circle at ${this.colorScheme.gradientThree[0]}% ${this.colorScheme.gradientThree[1]}%, ${this.colorScheme.colorOne} ${this.colorScheme.gradientThree[2]}%, ${this.colorScheme.colorTwo} ${this.colorScheme.gradientThree[3]}%)`)
+        rt.style.setProperty('--theme-gradient-four', `radial-gradient(circle at ${this.colorScheme.gradientFour[0]}% ${this.colorScheme.gradientFour[1]}%, ${this.colorScheme.colorOne} ${this.colorScheme.gradientFour[2]}%, ${this.colorScheme.colorTwo} ${this.colorScheme.gradientFour[3]}%)`)
 
         this.isReady = true
     }
