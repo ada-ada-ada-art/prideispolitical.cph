@@ -91,7 +91,6 @@ export default {
         this.colorScheme = themes[Math.floor(Math.random() * themes.length)]
 
         let rt = document.querySelector(':root')
-        console.log('Root', rt)
 
         rt.style.setProperty('--theme-color-one', this.colorScheme.colorOne)
         rt.style.setProperty('--theme-color-two', this.colorScheme.colorTwo)
