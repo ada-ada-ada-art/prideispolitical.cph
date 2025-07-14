@@ -1,6 +1,6 @@
 ---
 title:  2025 The future of STI testing
-datetime:  2025-08-15T19:00:00+02:00
+starttime:  2025-08-15T19:00:00+02:00
 organisers: AIDS Fondet
 venue: Indre by
 img_url: test/event1.png

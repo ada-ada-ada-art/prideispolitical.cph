@@ -1,6 +1,6 @@
 ---
 title: Ballroom History Talk + Vogue Fem Workshop
-datetime: 2024-08-16T17:00:00+02:00
+starttime: 2024-08-16T17:00:00+02:00
 organisers: Zutana 007 & Legendary JayJay Revlon
 venue: Dansekapellet
 img_url: 2024/ballroom-talk-workshop.jpg

@@ -1,6 +1,6 @@
 ---
 title: de sceneste PRIDE SPECIAL
-datetime: 2024-08-13T16:00:00+02:00
+starttime: 2024-08-13T16:00:00+02:00
 organisers: de sceneste
 venue: Urban 13
 img_url: 2024/sceneste.jpg

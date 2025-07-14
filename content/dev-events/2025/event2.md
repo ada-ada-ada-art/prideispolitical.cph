@@ -1,6 +1,6 @@
 ---
 title:  2025 Book reading by Danish trans authors
-datetime:  2025-08-10T17:00:00+02:00
+starttime:  2025-08-10T17:00:00+02:00
 organisers: Forlaget Gyldendal and Lindhardt & Ringhof
 venue: Skt. Hans Torv
 img_url: test/event2.png

@@ -1,6 +1,6 @@
 ---
 title: Dobbeltmarginalisering og ulighedsskabende normer
-datetime: 2024-08-15T17:00:00+02:00
+starttime: 2024-08-15T17:00:00+02:00
 organisers: Lægeforeningen, Normkritiske Læger & Sabaah
 venue: Domus Medica, Kristianiagade 12, 2100 København
 img_url: 2024/laeger.png

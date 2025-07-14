@@ -1,6 +1,6 @@
 ---
 title: "GAG x DAS: PRIDE"
-datetime: 2024-08-10T23:59:00+02:00
+starttime: 2024-08-10T23:59:00+02:00
 organisers: GAG CPH
 venue: Den Anden Side
 img_url: 2024/gag-das.jpg

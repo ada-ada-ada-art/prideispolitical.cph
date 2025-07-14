@@ -1,6 +1,6 @@
 ---
 title: Nørrebro Pride Parade 2025
-datetime:  2025-08-10T19:00:00+02:00
+starttime:  2025-08-10T19:00:00+02:00
 organisers: Nørrebro Pride
 venue: Nørrebro Station, Nørrebros Runddel, Skt. Hans Torv, Dronning Louises Bro
 img_url: test/event0.jpg

@@ -1,6 +1,6 @@
 ---
 title: Queer Krea - Pride Edition
-datetime: 2024-08-15T16:00:00+02:00
+starttime: 2024-08-15T16:00:00+02:00
 organisers: Queer Krea
 venue: Huset-KBH
 img_url: 2024/queer-krea/queer-krea.jpg

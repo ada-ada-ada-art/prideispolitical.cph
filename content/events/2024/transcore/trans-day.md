@@ -1,6 +1,6 @@
 ---
 title: Trans Day of Celebration
-datetime: 2024-08-24T12:00:00+02:00
+starttime: 2024-08-24T12:00:00+02:00
 organisers: Transc0re
 venue: Bøssehuset
 img_url: 2024/transcore/day.jpg

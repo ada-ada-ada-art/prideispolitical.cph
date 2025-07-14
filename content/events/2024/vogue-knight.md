@@ -1,6 +1,6 @@
 ---
 title: Taste the watermelon - Vogue knight (Kiki edition)
-datetime: 2024-08-17T18:00:00+02:00
+starttime: 2024-08-17T18:00:00+02:00
 organisers: Zutana hadaddeen (Zutana 007)
 venue: Dansekapellet
 img_url: 2024/vogue-knight/vogue-knight.jpg

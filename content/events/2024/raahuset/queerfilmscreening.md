@@ -1,6 +1,6 @@
 ---
 title: Queer film screening & talk
-datetime: 2024-08-14T18:00:00+02:00
+starttime: 2024-08-14T18:00:00+02:00
 organisers: MIX CPH & Sabaah
 venue: Råhuset
 img_url: 2024/raahuset/queerfilmscreening.png

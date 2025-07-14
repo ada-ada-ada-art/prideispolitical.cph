@@ -15,15 +15,32 @@
     </div>
     <div class="calendar">
         <h3 ref="calendar">Calendar</h3>
-        <div class="year-buttons">
-            <button v-for="f in festivals" :class="activeYear === f.year ? 'active' : ''" @click="activeYear = f.year; activeDate = 0">{{ f.year }}</button>
-        </div>
-        <p class="event-count" v-if="activeDate === 0">{{ eventCount }} event{{ eventCount === 1 ? '' : 's' }} in {{ activeYear }} {{ activeYear === startYear ? 'so far.' : '' }}<div v-if="eventCount < 5">Follow instructions <a @click="scrollToInstructions()" class="instructions-link">below</a> to get your event on the calendar.</div></p>
+        <p class="event-count" v-if="activeDate === 0">{{ eventCount }} event{{ eventCount === 1 ? '' : 's' }} in {{ activeYear }}{{ activeYear === startYear ? ' so far' : '' }}{{ searchTerm !== '' ? ' for your search' : '' }}.
+            <div v-if="eventCount < 5 && searchTerm === ''">Follow instructions <a @click="scrollToInstructions()" class="instructions-link">below</a> to get your event on the calendar.</div>
+        </p>
         <p class="event-count" v-else>{{ eventCount }} event{{ eventCount === 1 ? '' : 's' }} on {{ activeDate }}. August {{ activeYear }}</p>
-        <div class="date-buttons" v-if="eventCount > 0">
-            <template v-for="f in festivals">
-                <button v-if="f.year === activeYear" v-for="date in f.dates" :class="activeDate === date ? 'active' : ''" @click="activeDate = date" v-html="date > 0 ? date + '.<br>AUG' : 'All days' "></button>
-            </template>
+        <div class="filter-interface">
+            <div class="year-buttons">
+                <label for="year-picker">Year: </label>
+                <select name="year-picker" id="year-picker" v-model.number="activeYear" @change="activeDate = 0">
+                    <option v-for="f in festivals" :class="activeYear === f.year ? 'active' : ''">
+                        {{ f.year }}
+                    </option>
+                </select>
+            </div>
+            <div class="date-buttons">
+                <label for="date-picker">Day: </label>
+                <select name="date-picker" id="date-picker" v-model.number="activeDate">
+                    <template v-for="f in festivals">
+                        <option v-if="f.year === activeYear" v-for="date in f.dates" :class="activeYear === f.year ? 'active' : ''" :value="date">
+                            {{ date > 0 ? date + '. AUG' : 'All days' }}
+                        </option>
+                    </template>
+                </select>
+            </div>
+            <div class="search">
+                <input type="search" placeholder="Search..." v-model.trim="searchTerm">
+            </div>
         </div>
         <div class="events-container">
             <template v-for="event in events">
@@ -32,9 +49,15 @@
                         <div class="event-image" :style="imageSrc(event)"></div>
                     </div>
                     <div class="event-datetime">
-                        <p class="event-date">{{ new Date(event.datetime).toLocaleDateString('da-DK', { month: 'long', day: 'numeric'}) }}</p>
-                        <span class="datetime-splitter">-</span>
-                        <p class="event-time">{{ new Date(event.datetime).toLocaleTimeString('da-DK', { hour: '2-digit', minute: '2-digit' }) }}</p>
+                        <p class="event-date">{{ new Date(event.starttime).toLocaleDateString('da-DK', { month: 'long', day: 'numeric'}) }}</p>
+                        <span class="datetime-splitter"> at </span>
+                        <p class="event-time">{{ new Date(event.starttime).toLocaleTimeString('da-DK', { hour: '2-digit', minute: '2-digit' }) }}</p>
+                        <template v-if="event.endtime">
+                            <span class="datetime-splitter">—</span>
+                            <p class="event-date">{{ new Date(event.endtime).toLocaleDateString('da-DK', { month: 'long', day: 'numeric'}) }}</p>
+                            <span class="datetime-splitter"> at </span>
+                            <p class="event-time">{{ new Date(event.endtime).toLocaleTimeString('da-DK', { hour: '2-digit', minute: '2-digit' }) }}</p>
+                        </template>
                     </div>
                     <h4 class="event-title">{{ event.title }}</h4>
                     <p class="event-venue">{{ event.venue }}</p>
@@ -83,6 +106,7 @@ type Festival = {year:number, events:[], dates:number[]}
 const startYear = 2025
 let activeDate = ref(0)
 let activeYear = ref(0)
+let searchTerm = ref('')
 let festivals:Festival[] = [{
     year: startYear,
     events: [],
@@ -92,7 +116,7 @@ let festivals:Festival[] = [{
 let isDev = process.dev
 isDev = false
 let eventFolder = isDev ? 'dev-events' : 'events'
-const { data: events } = await useAsyncData(eventFolder, () => queryContent('/' + eventFolder).sort({datetime: 1}).find())
+const { data: events } = await useAsyncData(eventFolder, () => queryContent('/' + eventFolder).sort({starttime: 1}).find())
 let eventCount = computed(() => {
     return events.value.reduce((acc, cur) => {
         let shouldBeCounted = shouldShowEvent(cur)
@@ -106,9 +130,13 @@ let eventCount = computed(() => {
 
 // Put together Festival arrays so we can filter properly
 events.value.forEach((e, i) => {
-    let d = new Date(e.datetime)
-    let eventYear = d.getFullYear()
-    let eventDay = d.getDate()
+    let startDate = new Date(e.starttime)
+    let endDate = new Date(e.endtime ? e.endtime : e.starttime)
+    let eventYear = startDate.getFullYear()
+    let eventDays = []
+    for (let i = 0; i <= endDate.getDate() - startDate.getDate(); i++) {
+        eventDays.push(startDate.getDate() + i)
+    }
     let wasYearAdded = festivals.some((f) => {
         if (f.year === eventYear) {
             return true
@@ -124,8 +152,10 @@ events.value.forEach((e, i) => {
     festivals.forEach((f) => {
         if (f.year === eventYear) {
             f.events.push(e)
-            if (!f.dates.includes(eventDay)) {
-                f.dates.push(eventDay)
+            for(let eventDay of eventDays) {
+                if (!f.dates.includes(eventDay)) {
+                    f.dates.push(eventDay)
+                }
             }
         }
     })
@@ -151,10 +181,12 @@ function getDomainName(link:string) {
 }
 
 function shouldShowEvent(event) {
-    let eventDate = new Date(event.datetime)
-    let isCorrectDate = activeDate.value === 0 || eventDate.getDate() === activeDate.value
-    let isCorrectYear = activeYear.value === 0 || eventDate.getFullYear() === activeYear.value
-    return isCorrectDate && isCorrectYear
+    let startDate = new Date(event.starttime)
+    let endDate = new Date(event.endtime ? event.endtime : event.starttime)
+    let isCorrectDate = activeDate.value === 0 || (activeDate.value >= startDate.getDate() && activeDate.value <= endDate.getDate())
+    let isCorrectYear = activeYear.value === 0 || startDate.getFullYear() === activeYear.value
+    let matchesSearch = searchTerm.value === '' || event.title.toLowerCase().includes(searchTerm.value) || event.venue.toLowerCase().includes(searchTerm.value) || event.organisers.toLowerCase().includes(searchTerm.value)
+    return isCorrectDate && isCorrectYear && matchesSearch
 }
 
 const calendar = ref(null)
@@ -338,19 +370,18 @@ useHead({
     }
 }
 
-.date-buttons, .year-buttons {
+.filter-interface {
+    align-items: center;
     display: flex;
-    justify-content: space-evenly;
+    flex-direction: row;
     flex-flow: wrap;
+    justify-content: center;
+    text-transform: uppercase;
     width: 90vw;
+}
 
-    @include screenSizes(desktop) {
-        justify-content: center;
-        flex-flow: wrap;
-        width: 100%;
-    }
-
-    button {
+.date-buttons, .year-buttons {
+    select {
         background-color: $white;
         color: $black;
         border: 1px solid $black;
@@ -358,16 +389,7 @@ useHead({
         box-sizing: border-box;
         cursor: pointer;
         font-size: $base * 2;
-        height: $base * 8;
-        margin: 0 $base $base;
         text-transform: uppercase;
-        width: $base * 8;
-        
-        @include screenSizes(desktop) {
-            margin: 0 $base $base;
-            height: $base * 8;
-            width: $base * 8;
-        }
 
         &:hover:not(.active) {
             border-style: dashed;
@@ -383,11 +405,17 @@ useHead({
             color: $white;
         }
     }
+
+    option {
+        color: $black;
+    }
+}
+
+.date-buttons {
+    margin: 0 $base * 2;
 }
 
 .year-buttons {
-    margin-top: $base * 2;
-
     button {
         height: auto;
         margin-bottom: 0;
@@ -479,14 +507,6 @@ useHead({
     font-family: 'FIRSTGAYAMERICANS';
     font-size: $base * 2.5;
     z-index: 10;
-}
-
-.event-date {
-    padding-left: $base;
-}
-
-.event-time {
-    padding-right: $base;
 }
 
 .event-time, .event-date, .datetime-splitter {
