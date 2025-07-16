@@ -15,33 +15,39 @@
     </div>
     <div class="calendar">
         <h3 ref="calendar">Calendar</h3>
-        <p class="event-count" v-if="activeDate === 0">{{ eventCount }} event{{ eventCount === 1 ? '' : 's' }} in {{ activeYear }}{{ activeYear === startYear ? ' so far' : '' }}{{ searchTerm !== '' ? ' for your search' : '' }}.
-            <div v-if="eventCount < 5 && searchTerm === ''">Follow instructions <a @click="scrollToInstructions()" class="instructions-link">below</a> to get your event on the calendar.</div>
-        </p>
-        <p class="event-count" v-else>{{ eventCount }} event{{ eventCount === 1 ? '' : 's' }} on {{ activeDate }}. August {{ activeYear }}</p>
         <div class="filter-interface">
-            <div class="year-buttons">
-                <label for="year-picker">Year: </label>
-                <select name="year-picker" id="year-picker" v-model.number="activeYear" @change="activeDate = 0">
-                    <option v-for="f in festivals" :class="activeYear === f.year ? 'active' : ''">
-                        {{ f.year }}
-                    </option>
-                </select>
-            </div>
-            <div class="date-buttons">
-                <label for="date-picker">Day: </label>
-                <select name="date-picker" id="date-picker" v-model.number="activeDate">
-                    <template v-for="f in festivals">
-                        <option v-if="f.year === activeYear" v-for="date in f.dates" :class="activeYear === f.year ? 'active' : ''" :value="date">
-                            {{ date > 0 ? date + '. AUG' : 'All days' }}
+            <h4>Filter events</h4>
+            <div class="filter-container">
+                <div class="year-buttons">
+                    <label for="year-picker">Year: </label>
+                    <select name="year-picker" id="year-picker" v-model.number="activeYear" @change="activeDate = 0">
+                        <option v-for="f in festivals" :class="activeYear === f.year ? 'active' : ''">
+                            {{ f.year }}
                         </option>
-                    </template>
-                </select>
-            </div>
-            <div class="search">
-                <input type="search" placeholder="Search..." v-model.trim="searchTerm">
+                    </select>
+                </div>
+                <div class="date-buttons">
+                    <label for="date-picker">Day: </label>
+                    <select name="date-picker" id="date-picker" v-model.number="activeDate">
+                        <template v-for="f in festivals">
+                            <option v-if="f.year === activeYear" v-for="date in f.dates" :class="activeYear === f.year ? 'active' : ''" :value="date">
+                                {{ date > 0 ? date + '. AUG' : 'All days' }}
+                            </option>
+                        </template>
+                    </select>
+                </div>
+                <div class="search">
+                    <label for="event-search">Search: </label>
+                    <input type="search" name="event-search" id="event-search" placeholder="E.g. 'party'..." v-model.trim="searchTerm">
+                </div>
             </div>
         </div>
+        <p class="event-count" v-if="activeDate === 0">{{ eventCount }} event{{ eventCount === 1 ? '' : 's' }} in {{ activeYear }}{{ activeYear === startYear ? ' so far' : '' }}{{ searchTerm !== '' ? ' for your search' : '' }}.
+            <div v-if="activeYear === startYear">Follow instructions <a @click="scrollToInstructions()" class="instructions-link">below</a> to get your event on the calendar.</div>
+        </p>
+        <p class="event-count" v-else>{{ eventCount }} event{{ eventCount === 1 ? '' : 's' }} on {{ activeDate }}. August {{ activeYear }}{{ searchTerm !== '' ? ' for your search' : '' }}.
+            <div v-if="activeYear === startYear">Follow instructions <a @click="scrollToInstructions()" class="instructions-link">below</a> to get your event on the calendar.</div>
+        </p>
         <div class="events-container">
             <template v-for="event in events">
                 <div target="_blank" :to="event.url" class="event" v-if="shouldShowEvent(event)">
@@ -373,23 +379,64 @@ useHead({
 .filter-interface {
     align-items: center;
     display: flex;
-    flex-direction: row;
+    flex-direction: column;
     flex-flow: wrap;
     justify-content: center;
+    margin-top: $base * 2;
+    padding: $base * 2;
     text-transform: uppercase;
-    width: 90vw;
-}
+    width: 50vw;
 
-.date-buttons, .year-buttons {
+    h4 {
+        color: $white;
+        font-size: $base * 3;
+    }
+
+    .filter-container {
+        align-items: center;
+        display: flex;
+        flex-direction: row;
+        flex-flow: wrap;
+        justify-content: center;
+        padding: $base * 2;
+        text-transform: uppercase;
+        width: 50vw;
+    }
+
+    .theme-ready & {
+        background: var(--theme-color-one);
+        background: var(--theme-gradient-two);
+    }
+
+    input[type="search"] {
+        background: none;
+        border-color: $white;
+        border-width: 0 0 1px 0;
+        border-radius: 0;
+        color: $white;
+        font-family: 'FIRSTGAYAMERICANS';
+        font-size: $base * 2;
+        padding: $base $base $base 0;
+        text-transform: uppercase;
+
+        &::placeholder {
+            color: $white;
+        }
+    }
+
     select {
-        background-color: $white;
-        color: $black;
-        border: 1px solid $black;
+        // appearance: none;
+        background: none;
+        color: $white;
+        border: 1px solid $white;
         border-radius: 0;
         box-sizing: border-box;
         cursor: pointer;
+        font-family: 'FIRSTGAYAMERICANS';
         font-size: $base * 2;
+        padding: $base;
         text-transform: uppercase;
+        width: 100%;
 
         &:hover:not(.active) {
             border-style: dashed;
@@ -407,7 +454,20 @@ useHead({
     }
 
     option {
-        color: $black;
+        color: $white;
+    }
+
+    label {
+        color: $white;
+        font-family: 'Proxima Nova', sans-serif;
+        font-size: $base * 2;
+        margin-right: $base;
+        text-transform: none;
+    }
+
+    .date-buttons, .year-buttons {
+        align-items: center;
+        display: flex;
     }
 }
 
@@ -427,7 +487,6 @@ useHead({
     display: flex;
     flex-flow: row wrap;
     justify-content: space-evenly;
-    margin-top: $base * 4;
     width: 90vw;
 
     @include screenSizes(desktop) {
