@@ -1,5 +1,5 @@
 ---
-title: Trans Day of Celebration - Afterparty
+title: Trans Day of Celebration - Trans* Separatist Afterparty
 datetime: 2025-08-23T20:00:00+02:00
 organisers: Transc0re
 venue: Bøssehuset
