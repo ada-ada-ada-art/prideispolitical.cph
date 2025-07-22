@@ -32,14 +32,13 @@
                         <div class="event-image" :style="imageSrc(event)"></div>
                     </div>
                     <div class="event-datetime">
-                        <p class="event-date">{{ new Date(event.starttime).toLocaleDateString('da-DK', { month: 'long', day: 'numeric'}) }}</p>
-                        <span class="datetime-splitter"> at </span>
-                        <p class="event-time">{{ new Date(event.starttime).toLocaleTimeString('da-DK', { hour: '2-digit', minute: '2-digit' }) }}</p>
+                        <p class="event-time">{{ new Date(event.starttime).toLocaleDateString('da-DK', { month: 'long', day: 'numeric'}) }} at {{ new Date(event.starttime).toLocaleTimeString('da-DK', { hour: '2-digit', minute: '2-digit' }) }}</p>
                         <template v-if="event.endtime">
-                            <span class="datetime-splitter">—</span>
-                            <p class="event-date">{{ new Date(event.endtime).toLocaleDateString('da-DK', { month: 'long', day: 'numeric'}) }}</p>
-                            <span class="datetime-splitter"> at </span>
-                            <p class="event-time">{{ new Date(event.endtime).toLocaleTimeString('da-DK', { hour: '2-digit', minute: '2-digit' }) }}</p>
+                            <span class="datetime-splitter">-</span>
+                            <p class="event-time">
+                                <template v-if="new Date(event.endtime).toLocaleDateString('da-DK', { month: 'long', day: 'numeric'}) !== new Date(event.starttime).toLocaleDateString('da-DK', { month: 'long', day: 'numeric'})">
+                                {{ new Date(event.endtime).toLocaleDateString('da-DK', { month: 'long', day: 'numeric'}) }} at </template>{{ new Date(event.endtime).toLocaleTimeString('da-DK', { hour: '2-digit', minute: '2-digit' }) }}
+                            </p>
                         </template>
                     </div>
                     <h4 class="event-title">{{ event.title }}</h4>
@@ -478,41 +477,35 @@ useHead({
 }
 
 .event-datetime {
+    align-items: center;
     border-top: 1px solid $black;
     display: flex;
     justify-content: center;
+    margin-bottom: $base;
+    padding-top: $base * 2;
 }
 
 .datetime-splitter {
-    font-size: $base * 2.5;
-    margin: 0 $base;
-}
-
-.event-date, .event-time {
-    color: $black;
-    font-family: 'FIRSTGAYAMERICANS';
-    font-size: $base * 2.5;
-    z-index: 10;
-}
-
-.event-date {
-    padding-left: $base;
+    align-items: center;
+    display: inline-flex;
+    font-size: $base * 4;
+    padding: 0 $base * .5;
 }
 
 .event-time {
-    padding-right: $base;
+    color: $black;
+    font-family: 'FIRSTGAYAMERICANS';
+    font-size: $base * 2.5;
+    margin: 0;
+    text-align: center;
+    z-index: 10;
 }
 
-.event-time, .event-date, .datetime-splitter {
-    margin-top: $base * 2.5;
-}
-
-.event-time, .event-date, .event-venue, .datetime-splitter {
+.event-time, .event-venue {
     align-items: center;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
-    margin-bottom: $base;
     text-transform: uppercase;
 }
 
