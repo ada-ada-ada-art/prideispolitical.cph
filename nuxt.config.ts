@@ -29,7 +29,7 @@ export default defineNuxtConfig({
         {
           hid: 'og:image',
           name: 'og:image',
-          content: '/share-image.png'
+          content: 'https://prideispolitical.dk/share-image.png'
         }
       ],
       link: [{
