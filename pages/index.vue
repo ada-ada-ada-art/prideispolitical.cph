@@ -33,8 +33,14 @@
                     </div>
                     <div class="event-datetime">
                         <p class="event-date">{{ new Date(event.starttime).toLocaleDateString('da-DK', { month: 'long', day: 'numeric'}) }}</p>
-                        <span class="datetime-splitter">-</span>
+                        <span class="datetime-splitter"> at </span>
                         <p class="event-time">{{ new Date(event.starttime).toLocaleTimeString('da-DK', { hour: '2-digit', minute: '2-digit' }) }}</p>
+                        <template v-if="event.endtime">
+                            <span class="datetime-splitter">—</span>
+                            <p class="event-date">{{ new Date(event.endtime).toLocaleDateString('da-DK', { month: 'long', day: 'numeric'}) }}</p>
+                            <span class="datetime-splitter"> at </span>
+                            <p class="event-time">{{ new Date(event.endtime).toLocaleTimeString('da-DK', { hour: '2-digit', minute: '2-digit' }) }}</p>
+                        </template>
                     </div>
                     <h4 class="event-title">{{ event.title }}</h4>
                     <p class="event-venue">{{ event.venue }}</p>
