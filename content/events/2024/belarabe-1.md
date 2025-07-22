@@ -1,6 +1,6 @@
 ---
 title: Pride Bel Arabe Day 2
-datetime: 2024-08-14T17:30:00+02:00
+starttime: 2024-08-14T17:30:00+02:00
 organisers: Pride Bel Arabe
 venue: KU.BE
 img_url: 2024/belarabe/belarabe.jpg

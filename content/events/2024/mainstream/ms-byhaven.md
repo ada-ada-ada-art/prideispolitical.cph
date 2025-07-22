@@ -1,6 +1,6 @@
 ---
 title: Mainstream Unofficial Pride
-datetime: 2024-08-17T15:00:00+02:00
+starttime: 2024-08-17T15:00:00+02:00
 organisers: Mainstream
 venue: Byhaven Pumpehuset
 img_url: 2024/ms-byhaven.jpg

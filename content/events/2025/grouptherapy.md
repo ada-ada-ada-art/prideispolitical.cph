@@ -1,6 +1,6 @@
 ---
 title: "Group Therapy: PRIDE"
-datetime: 2025-08-16T22:00:00+02:00
+starttime: 2025-08-16T22:00:00+02:00
 organisers: Group Therapy
 venue: Den Anden Side
 img_url: 2025/grouptherapy.jpg

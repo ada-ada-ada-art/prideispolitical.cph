@@ -1,6 +1,6 @@
 ---
 title: "Iconic dyke film screening: BOUND (1996)"
-datetime: 2024-08-21T19:00:00+02:00
+starttime: 2024-08-21T19:00:00+02:00
 organisers: Ride or Dyke
 venue: Kapelvej 44, Nørrebro
 img_url: 2024/ride-or-dyke.jpg

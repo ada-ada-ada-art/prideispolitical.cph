@@ -1,6 +1,6 @@
 ---
 title: Listening is caring (Talk)
-datetime: 2024-08-16T17:00:00+02:00
+starttime: 2024-08-16T17:00:00+02:00
 organisers: Side28, Det Lilla Rum & Wild Thingz
 venue: ODP3 / Ovenpå
 img_url: 2024/raahuset/listening-is-caring.jpg

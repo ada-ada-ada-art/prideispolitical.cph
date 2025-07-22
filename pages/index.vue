@@ -32,9 +32,9 @@
                         <div class="event-image" :style="imageSrc(event)"></div>
                     </div>
                     <div class="event-datetime">
-                        <p class="event-date">{{ new Date(event.datetime).toLocaleDateString('da-DK', { month: 'long', day: 'numeric'}) }}</p>
+                        <p class="event-date">{{ new Date(event.starttime).toLocaleDateString('da-DK', { month: 'long', day: 'numeric'}) }}</p>
                         <span class="datetime-splitter">-</span>
-                        <p class="event-time">{{ new Date(event.datetime).toLocaleTimeString('da-DK', { hour: '2-digit', minute: '2-digit' }) }}</p>
+                        <p class="event-time">{{ new Date(event.starttime).toLocaleTimeString('da-DK', { hour: '2-digit', minute: '2-digit' }) }}</p>
                     </div>
                     <h4 class="event-title">{{ event.title }}</h4>
                     <p class="event-venue">{{ event.venue }}</p>
@@ -92,7 +92,7 @@ let festivals:Festival[] = [{
 let isDev = process.dev
 isDev = false
 let eventFolder = isDev ? 'dev-events' : 'events'
-const { data: events } = await useAsyncData(eventFolder, () => queryContent('/' + eventFolder).sort({datetime: 1}).find())
+const { data: events } = await useAsyncData(eventFolder, () => queryContent('/' + eventFolder).sort({starttime: 1}).find())
 let eventCount = computed(() => {
     return events.value.reduce((acc, cur) => {
         let shouldBeCounted = shouldShowEvent(cur)
@@ -106,9 +106,13 @@ let eventCount = computed(() => {
 
 // Put together Festival arrays so we can filter properly
 events.value.forEach((e, i) => {
-    let d = new Date(e.datetime)
-    let eventYear = d.getFullYear()
-    let eventDay = d.getDate()
+    let startDate = new Date(e.starttime)
+    let endDate = new Date(e.endtime ? e.endtime : e.starttime)
+    let eventYear = startDate.getFullYear()
+    let eventDays = []
+    for (let i = 0; i <= endDate.getDate() - startDate.getDate(); i++) {
+        eventDays.push(startDate.getDate() + i)
+    }
     let wasYearAdded = festivals.some((f) => {
         if (f.year === eventYear) {
             return true
@@ -124,12 +128,15 @@ events.value.forEach((e, i) => {
     festivals.forEach((f) => {
         if (f.year === eventYear) {
             f.events.push(e)
-            if (!f.dates.includes(eventDay)) {
-                f.dates.push(eventDay)
+            for(let eventDay of eventDays) {
+                if (!f.dates.includes(eventDay)) {
+                    f.dates.push(eventDay)
+                }
             }
         }
     })
 })
+
 // Sort festivals by latest year
 festivals.sort((a, b) => {
     return a.year > b.year ? -1 : 1
@@ -151,9 +158,10 @@ function getDomainName(link:string) {
 }
 
 function shouldShowEvent(event) {
-    let eventDate = new Date(event.datetime)
-    let isCorrectDate = activeDate.value === 0 || eventDate.getDate() === activeDate.value
-    let isCorrectYear = activeYear.value === 0 || eventDate.getFullYear() === activeYear.value
+    let startDate = new Date(event.starttime)
+    let endDate = new Date(event.endtime ? event.endtime : event.starttime)
+    let isCorrectDate = activeDate.value === 0 || (activeDate.value >= startDate.getDate() && activeDate.value <= endDate.getDate())
+    let isCorrectYear = activeYear.value === 0 || startDate.getFullYear() === activeYear.value
     return isCorrectDate && isCorrectYear
 }
 

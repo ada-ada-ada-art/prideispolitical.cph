@@ -1,6 +1,6 @@
 ---
 title: Nørrebro Pride Demo
-datetime: 2024-08-17T12:00:00+02:00
+starttime: 2024-08-17T12:00:00+02:00
 organisers: Nørrebro Pride
 venue: Nørrebro
 img_url: 2024/nbropride/nbropride.jpeg
