@@ -16,12 +16,11 @@
     <div class="calendar">
         <h3 ref="calendar">Calendar</h3>
         <div class="filter-interface">
-            <h4>Filter events</h4>
             <div class="filter-container">
                 <div class="year-buttons">
                     <label for="year-picker">Year: </label>
                     <select name="year-picker" id="year-picker" v-model.number="activeYear" @change="activeDate = 0">
-                        <option v-for="f in festivals" :class="activeYear === f.year ? 'active' : ''">
+                        <option v-for="f in festivals">
                             {{ f.year }}
                         </option>
                     </select>
@@ -30,8 +29,8 @@
                     <label for="date-picker">Day: </label>
                     <select name="date-picker" id="date-picker" v-model.number="activeDate">
                         <template v-for="f in festivals">
-                            <option v-if="f.year === activeYear" v-for="date in f.dates" :class="activeYear === f.year ? 'active' : ''" :value="date">
-                                {{ date > 0 ? date + '. AUG' : 'All days' }}
+                            <option v-if="f.year === activeYear" v-for="date in f.dates" :value="date">
+                                {{ date > 0 ? date + '. August' : 'All days' }}
                             </option>
                         </template>
                     </select>
@@ -378,6 +377,7 @@ useHead({
 
 .filter-interface {
     align-items: center;
+    border: 1px solid $black;
     display: flex;
     flex-direction: column;
     flex-flow: wrap;
@@ -385,11 +385,11 @@ useHead({
     margin-top: $base * 2;
     padding: $base * 2;
     text-transform: uppercase;
-    width: 50vw;
-
-    h4 {
-        color: $white;
-        font-size: $base * 3;
+    width: 100%;
+    max-width: $baseMaxMobileWidth;
+        
+    @include screenSizes(desktop) {
+        max-width: 50vw;
     }
 
     .filter-container {
@@ -397,10 +397,10 @@ useHead({
         display: flex;
         flex-direction: row;
         flex-flow: wrap;
-        justify-content: center;
+        justify-content: space-between;
         padding: $base * 2;
         text-transform: uppercase;
-        width: 50vw;
+        width: 100%;
     }
 
     .theme-ready & {
@@ -413,14 +413,17 @@ useHead({
         border-color: $white;
         border-width: 0 0 1px 0;
         border-radius: 0;
+        box-sizing: border-box;
         color: $white;
-        font-family: 'FIRSTGAYAMERICANS';
+        font-family: 'Proxima Nova', sans-serif;
+        // font-family: 'FIRSTGAYAMERICANS';
         font-size: $base * 2;
         padding: $base $base $base 0;
-        text-transform: uppercase;
+        // text-transform: uppercase;
+        min-width: $base * 12;
 
         &::placeholder {
-            color: $white;
+            color: dimgrey;
         }
     }
 
@@ -432,10 +435,12 @@ useHead({
         border-radius: 0;
         box-sizing: border-box;
         cursor: pointer;
-        font-family: 'FIRSTGAYAMERICANS';
+        font-family: 'Proxima Nova', sans-serif;
+        // font-family: 'FIRSTGAYAMERICANS';
         font-size: $base * 2;
         padding: $base;
-        text-transform: uppercase;
+        // text-transform: uppercase;
+        min-width: $base * 12;
         width: 100%;
 
         &:hover:not(.active) {
@@ -459,16 +464,26 @@ useHead({
 
     label {
         color: $white;
-        font-family: 'Proxima Nova', sans-serif;
-        font-size: $base * 2;
+        font-family: 'FIRSTGAYAMERICANS';
+        font-size: $base * 3;
         margin-right: $base;
-        text-transform: none;
+        text-transform: uppercase;
     }
+}
 
-    .date-buttons, .year-buttons {
-        align-items: center;
-        display: flex;
-    }
+.date-buttons, .year-buttons, .search {
+    flex-basis: 20%;
+}
+
+.search {
+    align-items: center;
+    display: flex;
+    flex-direction: column;
+}
+
+.date-buttons, .year-buttons {
+    align-items: center;
+    display: flex;
 }
 
 .date-buttons {
