@@ -30,14 +30,14 @@
                     <select name="date-picker" id="date-picker" v-model.number="activeDate">
                         <template v-for="f in festivals">
                             <option v-if="f.year === activeYear" v-for="date in f.dates" :value="date">
-                                {{ date > 0 ? date + '. August' : 'All days' }}
+                                {{ date > 0 ? new Date(activeYear + '-08-' + date).toLocaleDateString('en-UK', { weekday: 'short', day: 'numeric', month: 'long' }) : 'All days' }}
                             </option>
                         </template>
                     </select>
                 </div>
                 <div class="search">
                     <label for="event-search">Search: </label>
-                    <input type="search" name="event-search" id="event-search" placeholder="E.g. 'party'..." v-model.trim="searchTerm">
+                    <input type="search" name="event-search" id="event-search" placeholder="E.g. 'trans'..." v-model.trim="searchTerm">
                 </div>
             </div>
         </div>
@@ -272,7 +272,7 @@ useHead({
         border-style: dotted;
     }
 
-    border: 2px solid $black;
+    border: 1px solid $black;
     color: $black;
     cursor: pointer;
     font-size: $base * 3;
@@ -390,7 +390,7 @@ useHead({
     max-width: $baseMaxMobileWidth;
         
     @include screenSizes(desktop) {
-        max-width: 50vw;
+        max-width: $baseMaxWidth;
     }
 
     .filter-container {
@@ -403,33 +403,35 @@ useHead({
         width: 100%;
     }
 
-    .theme-ready & {
-        background: var(--theme-color-one);
-        background: var(--theme-gradient-two);
-    }
-
     input[type="search"] {
         background: none;
-        border-color: $white;
-        border-width: 0 0 1px 0;
-        border-radius: 0;
+        border-color: var(--theme-color-one);
+        border-style: solid;
+        border-width: 1px;
         box-sizing: border-box;
-        color: $white;
+        color: $black;
         flex-basis: 60%;
         font-family: 'Proxima Nova', sans-serif;
         font-size: $base * 2;
-        padding: $base $base $base 0;
+        padding: $base $base $base $base;
+
+        .theme-ready & {
+            // background: var(--theme-color-one);
+            border-image: var(--theme-gradient-two) 1;
+        }
 
         &::placeholder {
-            color: #eee;
+            color: #333;
             font-style: italic;
         }
     }
 
     select {
         background: none;
-        color: $white;
-        border: 1px solid $white;
+        color: $black;
+        border-color: var(--theme-color-one);
+        border-style: solid;
+        border-width: 1px;
         border-radius: 0;
         box-sizing: border-box;
         cursor: pointer;
@@ -439,27 +441,19 @@ useHead({
         padding: $base;
         width: 100%;
 
-        &:hover:not(.active) {
-            border-style: dashed;
-        }
-
-        &.active {
-            .theme-ready & {
-                background: var(--theme-color-one);
-                background: var(--theme-gradient-three);
-            }
-
-            border: none;
-            color: $white;
+        .theme-ready & {
+            // background: var(--theme-color-two);
+            // background: var(--theme-gradient-three);
+            border-image: var(--theme-gradient-three) 1;
         }
     }
 
     option {
-        color: $white;
+        color: $black;
     }
 
     label {
-        color: $white;
+        color: $black;
         font-family: 'FIRSTGAYAMERICANS';
         font-size: $base * 3;
         margin-right: $base;
@@ -469,6 +463,14 @@ useHead({
 
 .date-buttons {
     margin: $base * 2 0;
+
+    select {
+        .theme-ready & {
+            // background: var(--theme-color-two);
+            // background: var(--theme-gradient-one);
+            border-image: var(--theme-gradient-one) 1;
+        }
+    }
 }
 
 .year-buttons, .date-buttons, .search {
