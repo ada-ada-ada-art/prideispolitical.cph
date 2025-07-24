@@ -378,6 +378,7 @@ useHead({
 .filter-interface {
     align-items: center;
     border: 1px solid $black;
+    box-sizing: border-box;
     display: flex;
     flex-direction: column;
     flex-flow: wrap;
@@ -395,10 +396,9 @@ useHead({
     .filter-container {
         align-items: center;
         display: flex;
-        flex-direction: row;
-        flex-flow: wrap;
+        flex-direction: column;
+        flex-wrap: wrap;
         justify-content: space-between;
-        padding: $base * 2;
         text-transform: uppercase;
         width: 100%;
     }
@@ -415,32 +415,28 @@ useHead({
         border-radius: 0;
         box-sizing: border-box;
         color: $white;
+        flex-basis: 60%;
         font-family: 'Proxima Nova', sans-serif;
-        // font-family: 'FIRSTGAYAMERICANS';
         font-size: $base * 2;
         padding: $base $base $base 0;
-        // text-transform: uppercase;
-        min-width: $base * 12;
 
         &::placeholder {
-            color: dimgrey;
+            color: #eee;
+            font-style: italic;
         }
     }
 
     select {
-        // appearance: none;
         background: none;
         color: $white;
         border: 1px solid $white;
         border-radius: 0;
         box-sizing: border-box;
         cursor: pointer;
+        flex-basis: 60%;
         font-family: 'Proxima Nova', sans-serif;
-        // font-family: 'FIRSTGAYAMERICANS';
         font-size: $base * 2;
         padding: $base;
-        // text-transform: uppercase;
-        min-width: $base * 12;
         width: 100%;
 
         &:hover:not(.active) {
@@ -471,30 +467,15 @@ useHead({
     }
 }
 
-.date-buttons, .year-buttons, .search {
-    flex-basis: 20%;
-}
-
-.search {
-    align-items: center;
-    display: flex;
-    flex-direction: column;
-}
-
-.date-buttons, .year-buttons {
-    align-items: center;
-    display: flex;
-}
-
 .date-buttons {
-    margin: 0 $base * 2;
+    margin: $base * 2 0;
 }
 
-.year-buttons {
-    button {
-        height: auto;
-        margin-bottom: 0;
-    }
+.year-buttons, .date-buttons, .search {
+    align-items: center;
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
 }
 
 .events-container {
