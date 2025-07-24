@@ -30,7 +30,7 @@
                     <select name="date-picker" id="date-picker" v-model.number="activeDate">
                         <template v-for="f in festivals">
                             <option v-if="f.year === activeYear" v-for="date in f.dates" :value="date">
-                                {{ date > 0 ? new Date(activeYear + '-08-' + date).toLocaleDateString('en-UK', { weekday: 'short', day: 'numeric', month: 'long' }) : 'All days' }}
+                                {{ date > 0 ? new Date(activeYear + '-08-' + (date < 10 ? '0' + date : date)).toLocaleDateString('en-UK', { weekday: 'short', day: 'numeric', month: 'long' }) : 'All days' }}
                             </option>
                         </template>
                     </select>
@@ -45,7 +45,7 @@
             <div v-if="activeYear === startYear">Follow instructions <a @click="scrollToInstructions()" class="instructions-link">below</a> to get your event on the calendar.</div>
         </p>
         <p class="event-count" v-else>{{ eventCount }} event{{ eventCount === 1 ? '' : 's' }} on {{ activeDate }}. August {{ activeYear }}{{ searchTerm !== '' ? ' for your search' : '' }}.
-            <div v-if="activeYear === startYear">Follow instructions <a @click="scrollToInstructions()" class="instructions-link">below</a> to get your event on the calendar.</div>
+
         </p>
         <div class="events-container">
             <template v-for="event in events">
@@ -120,7 +120,7 @@ let festivals:Festival[] = [{
 let isDev = process.dev
 isDev = false
 let eventFolder = isDev ? 'dev-events' : 'events'
-const { data: events } = await useAsyncData(eventFolder, () => queryContent('/' + eventFolder).sort({starttime: 1}).find())
+const { data: events } = await useAsyncData(eventFolder, () => queryContent('/' + eventFolder).sort({starttime: 1}).where({unpublished: {$exists: false}}).find())
 let eventCount = computed(() => {
     return events.value.reduce((acc, cur) => {
         let shouldBeCounted = shouldShowEvent(cur)
@@ -376,13 +376,8 @@ useHead({
 }
 
 .filter-interface {
-    align-items: center;
     border: 1px solid $black;
     box-sizing: border-box;
-    display: flex;
-    flex-direction: column;
-    flex-flow: wrap;
-    justify-content: center;
     margin-top: $base * 2;
     padding: $base * 2;
     text-transform: uppercase;
@@ -401,6 +396,10 @@ useHead({
         justify-content: space-between;
         text-transform: uppercase;
         width: 100%;
+
+        @include screenSizes(desktop) {
+            flex-direction: row;
+        }
     }
 
     input[type="search"] {
@@ -416,7 +415,6 @@ useHead({
         padding: $base $base $base $base;
 
         .theme-ready & {
-            // background: var(--theme-color-one);
             border-image: var(--theme-gradient-two) 1;
         }
 
@@ -427,6 +425,7 @@ useHead({
     }
 
     select {
+        appearance: none;
         background: none;
         color: $black;
         border-color: var(--theme-color-one);
@@ -439,11 +438,12 @@ useHead({
         font-family: 'Proxima Nova', sans-serif;
         font-size: $base * 2;
         padding: $base;
-        width: 100%;
+
+        @include screenSizes(desktop) {
+            max-width: $baseMaxWidth;
+        }
 
         .theme-ready & {
-            // background: var(--theme-color-two);
-            // background: var(--theme-gradient-three);
             border-image: var(--theme-gradient-three) 1;
         }
     }
@@ -466,9 +466,29 @@ useHead({
 
     select {
         .theme-ready & {
-            // background: var(--theme-color-two);
-            // background: var(--theme-gradient-one);
             border-image: var(--theme-gradient-one) 1;
+        }
+    }
+}
+
+.year-buttons, .date-buttons {
+    position: relative;
+
+    &::after {
+        content: '▾';
+        color: var(--theme-color-two);
+        font-family: sans-serif;
+        font-style: normal;
+        height: 100%;
+        pointer-events: none;
+        position: absolute;
+        right: $base * 2;
+        top: $base;
+        width: $base;
+        z-index: 999;
+
+        @include screenSizes(desktop) {
+            right: 15%;
         }
     }
 }
@@ -478,6 +498,12 @@ useHead({
     display: flex;
     justify-content: space-between;
     width: 100%;
+
+    @include screenSizes(desktop) {
+        flex-basis: 30%;
+        justify-content: center;
+        width: auto;
+    }
 }
 
 .events-container {
