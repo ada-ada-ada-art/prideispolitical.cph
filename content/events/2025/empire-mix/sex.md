@@ -1,5 +1,5 @@
 ---
-title: "Pride Week Film Program: Sex"
+title: "Pride Week Films: Sex"
 starttime: 2025-08-11T17:00:00+02:00
 organisers: MIX Copenhagen & Empire Bio
 venue: Empire Bio

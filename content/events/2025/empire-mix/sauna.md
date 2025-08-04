@@ -1,5 +1,5 @@
 ---
-title: "Pride Week Film Program: Sauna"
+title: "Pride Week Films: Sauna"
 starttime: 2025-08-14T17:00:00+02:00
 organisers: MIX Copenhagen & Empire Bio
 venue: Empire Bio
