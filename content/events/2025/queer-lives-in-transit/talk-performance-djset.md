@@ -7,4 +7,5 @@ venue: Ovenpå
 img_url: 2025/queer-lives-in-transit/talk-performance-djset.jpg
 main_url: https://facebook.com/events/1567351001346396
 secondary_url: https://instagram.com/queerlivesintransit
+unpublished: true
 ---

@@ -97,7 +97,7 @@ let festivals:Festival[] = [{
 let isDev = process.dev
 isDev = false
 let eventFolder = isDev ? 'dev-events' : 'events'
-const { data: events } = await useAsyncData(eventFolder, () => queryContent('/' + eventFolder).sort({starttime: 1}).find())
+const { data: events } = await useAsyncData(eventFolder, () => queryContent('/' + eventFolder).sort({starttime: 1}).where({unpublished: {$exists: false}}).find())
 let eventCount = computed(() => {
     return events.value.reduce((acc, cur) => {
         let shouldBeCounted = shouldShowEvent(cur)

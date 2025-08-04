@@ -7,4 +7,5 @@ venue: Ovenpå
 img_url: 2025/queer-lives-in-transit/exhibition.jpg
 main_url: https://facebook.com/events/4060623180850615
 secondary_url: https://instagram.com/queerlivesintransit
+unpublished: true
 ---

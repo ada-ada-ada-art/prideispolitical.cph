@@ -6,4 +6,5 @@ organisers: Shamelezz
 venue: Onkel Dannys Plads
 img_url: 2025/onkeldannysplads/shamelezz.jpg
 main_url: https://onkeldannysplads.kk.dk/kalender/shamelezz-drag-show-alternative-pride
+unpublished: true
 ---

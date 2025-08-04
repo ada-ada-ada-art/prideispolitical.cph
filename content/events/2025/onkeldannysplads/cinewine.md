@@ -6,4 +6,5 @@ organisers: CineWine
 venue: Råhuset
 img_url: 2025/onkeldannysplads/cinewine.jpg
 main_url: https://onkeldannysplads.kk.dk/kalender/cinewine-pride-edition-alternative-pride
+unpublished: true
 ---

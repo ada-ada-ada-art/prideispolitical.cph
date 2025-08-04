@@ -6,4 +6,5 @@ organisers: Byliv Vesterbro
 venue: Råhuset
 img_url: 2025/onkeldannysplads/allevenligt-pride.jpg
 main_url: https://onkeldannysplads.kk.dk/kalender/allevenligt-pride-alternative-pride
+unpublished: true
 ---

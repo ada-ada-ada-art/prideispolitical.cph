@@ -6,4 +6,5 @@ organisers: Sabaah, MIX CPH
 venue: Råhuset
 img_url: 2025/onkeldannysplads/sabaah-mix.jpg
 main_url: https://onkeldannysplads.kk.dk/kalender/sabaah-x-mix-cph-queer-film-screening-alternative-pride
+unpublished: true
 ---

@@ -6,4 +6,5 @@ organisers: Smut Slam
 venue: Råhuset
 img_url: 2025/onkeldannysplads/smut-slam.jpg
 main_url: https://onkeldannysplads.kk.dk/kalender/smut-slam-copenhagen-alternative-pride-0
+unpublished: true
 ---
