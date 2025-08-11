@@ -148,7 +148,17 @@ festivals.sort((a, b) => {
 })
 
 onMounted(() => {
-  activeYear.value = startYear
+    activeYear.value = startYear
+    let now = new Date()
+    festivals.forEach((f) => {
+        // Only set date if August
+        if (f.year === startYear && now.getMonth() === 7) {
+            let today = now.getDate()
+            let newDate = f.dates.find((d) => d === today)
+            // Set date if it's among possible festival dates
+            if (newDate) activeDate.value = newDate
+        }
+    })
 })
 
 const img = useImage()
