@@ -1,6 +1,6 @@
 ---
 title: "Pride Week Films: Queer"
-starttime: 2025-08-17T22:00:00+02:00
+starttime: 2025-08-15T22:00:00+02:00
 organisers: MIX Copenhagen & Empire Bio
 venue: Empire Bio
 img_url: 2025/empire-mix/queer.jpg
