@@ -18,7 +18,7 @@
         <div class="year-buttons">
             <button v-for="f in festivals" :class="activeYear === f.year ? 'active' : ''" @click="activeYear = f.year; activeDate = 0">{{ f.year }}</button>
         </div>
-        <p class="event-count" v-if="activeDate === 0">{{ eventCount }} event{{ eventCount === 1 ? '' : 's' }} in {{ activeYear }} {{ activeYear === startYear ? 'so far.' : '' }}<div v-if="eventCount < 15">Follow instructions <a @click="scrollToInstructions()" class="instructions-link">below</a> to get your event on the calendar.</div></p>
+        <p class="event-count" v-if="activeDate === 0">{{ eventCount }} event{{ eventCount === 1 ? '' : 's' }} in {{ activeYear }} {{ activeYear === startYear && isProjectActive ? 'so far.' : '' }}<div v-if="eventCount < 15">Follow instructions <a @click="scrollToInstructions()" class="instructions-link">below</a> to get your event on the calendar.</div></p>
         <p class="event-count" v-else>{{ eventCount }} event{{ eventCount === 1 ? '' : 's' }} on {{ activeDate }}. August {{ activeYear }}</p>
         <div class="date-buttons" v-if="eventCount > 0">
             <template v-for="f in festivals">
@@ -86,6 +86,7 @@
 <script setup lang="ts">
 type Festival = {year:number, events:[], dates:number[]}
 const startYear = 2025
+const isProjectActive = false
 let activeDate = ref(0)
 let activeYear = ref(0)
 let festivals:Festival[] = [{
