@@ -54,8 +54,18 @@
     </div>
     <div class="submission" id="submission">
         <h3 ref="instructions">Send us your event</h3>
-        <p>To get your event onto the Pride is Political calendar, send us the following information about your event via email (recommended) or Instagram:</p>
-        <p>Event title, time and date, location, name of organizer group, one or two links to the event (we recommend using <NuxtLink to="https://dukop.dk/" target="_blank">Duk Op</NuxtLink>) and an event image.</p>
+        <p>To get your event onto the Pride is Political calendar, send us the following information about your event via email (recommended) or in a message on Instagram:</p>
+        <div>
+            <ul>
+                <li>1. Event title</li>
+                <li>2. Time and date</li>
+                <li>3. Location</li>
+                <li>4. Name of organizer group</li>
+                <li>5. One or two links to the event</li>
+                <li>6. A wide-format event image</li>
+            </ul>
+        </div>
+        <p>If you sell tickets for your event, consider providing one link for info and another for ticket sales. We recommend using <NuxtLink to="https://dukop.dk/" target="_blank">Duk Op</NuxtLink> for event info links in order get away from Meta platforms.</p>
         <p>
             Instagram - <NuxtLink to="https://instagram.com/prideispolitical.cph">@prideispolitical.cph</NuxtLink><br/>
             Email - <NuxtLink to="mailto:prideispolitical.cph@proton.me">prideispolitical.cph@proton.me</NuxtLink>
@@ -63,29 +73,18 @@
     </div>
     <div class="newsletter">
         <h3>Stay updated</h3>
-        <p>Sign up to our newsletter or <NuxtLink to="https://pixelfed.social/prideispolitical.cph">find us on Pixelfed</NuxtLink> to get updates from Pride is Political outside of Meta platforms:</p>
-        <form
-        action="https://buttondown.com/api/emails/embed-subscribe/prideispolitical.cph"
-        method="post"
-        target="popupwindow"
-        onsubmit="window.open('https://buttondown.com/prideispolitical.cph', 'popupwindow')"
-        class="embeddable-buttondown-form"
-        >
-            <label for="bd-email">Enter your email address</label>
-            <div class="input-container">
-                <input type="email" required name="email" id="bd-email" placeholder="hello@example.com" />
-                <input type="submit" value="Sign up" />
-            </div>
-        </form>
+        <p><NuxtLink to="https://pixelfed.social/prideispolitical.cph">Follow us on Pixelfed</NuxtLink> to get updates outside of Meta platforms.</p>
+        <p>or...</p>
+        <p><NuxtLink to="https://www.instagram.com/prideispolitical.cph/">Follow us on Instagram</NuxtLink>, if you're not on the Fediverse yet.</p>
     </div>
     <footer>
-        <p>Pride is Political is a project by <NuxtLink target="_blank" to="https://ada-ada-ada.art">Ada Ada Ada</NuxtLink>, Michael Länger and friends.</p>
+        <p>Pride is Political is a project by <NuxtLink target="_blank" to="https://ada-ada-ada.art">Ada Ada Ada</NuxtLink> and friends.</p>
     </footer>
 </template>
 
 <script setup lang="ts">
 type Festival = {year:number, events:[], dates:number[]}
-const startYear = 2025
+const startYear = 2026
 const isProjectActive = false
 let activeDate = ref(0)
 let activeYear = ref(0)
@@ -607,6 +606,32 @@ useHead({
     flex-direction: column;
     margin-bottom: $base * 4;
 
+    ul {
+        display: flex;
+        font-family: 'Proxima Nova', sans-serif;
+        flex-direction: row;
+        flex-wrap: wrap;
+        justify-content: space-between;
+        margin: 0;
+        padding: 0;
+
+        max-width: $baseMaxMobileWidth;
+        
+        @include screenSizes(desktop) {
+            max-width: $base * 80;
+        }
+
+        li {
+            align-items: center;
+            box-sizing: border-box;
+            border: 1px solid $black;
+            display: flex;
+            flex-basis: 48%;
+            margin-bottom: $base;
+            padding: $base;
+        }
+    }
+
     p {
         font-family: 'Proxima Nova', sans-serif;
         font-size: $base * 2.5;
@@ -648,8 +673,13 @@ useHead({
     p {
         font-family: 'Proxima Nova', sans-serif;
         font-size: $base * 2.5;
+        margin: $base 0 0;
         text-align: center;
         max-width: $baseMaxMobileWidth;
+
+        &:first-of-type {
+            margin-top: $base * 2;
+        }
         
         @include screenSizes(desktop) {
             max-width: $base * 80;
