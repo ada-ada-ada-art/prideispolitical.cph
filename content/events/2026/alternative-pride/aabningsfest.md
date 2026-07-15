@@ -6,4 +6,5 @@ organisers: Cumfort
 venue: Onkel Dannys Plads
 img_url: 2026/alternative-pride/aabningsfest.jpg
 main_url: https://instagram.com/p/DaalQ4vjU_7/
+unpublished: true
 ---

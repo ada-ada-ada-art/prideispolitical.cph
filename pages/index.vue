@@ -85,7 +85,7 @@
 <script setup lang="ts">
 type Festival = {year:number, events:[], dates:number[]}
 const startYear = 2026
-const isProjectActive = false
+const isProjectActive = true
 let activeDate = ref(0)
 let activeYear = ref(0)
 let festivals:Festival[] = [{

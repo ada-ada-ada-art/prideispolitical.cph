@@ -5,4 +5,5 @@ organisers: Trans Pride
 venue: Fælledparken
 img_url: 2026/trans-pride.jpg
 main_url: https://www.instagram.com/transpridecph/
+unpublished: true
 ---
