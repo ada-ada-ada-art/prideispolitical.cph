@@ -4,6 +4,6 @@ starttime: 2026-08-01T12:00:00+02:00
 organisers: Trans Pride
 venue: Fælledparken
 img_url: 2026/trans-pride.jpg
-main_url: https://www.instagram.com/transpridecph/
-unpublished: true
+main_url: https://dukop.dk/en/event/trans-pride-copenhagen/9892/
+secondary_url: https://instagram.com/transpridecph/
 ---
